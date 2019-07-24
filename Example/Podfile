@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'MDUI_Example' do
+  pod 'MDUI', :path => '../'
+
+  target 'MDUI_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
