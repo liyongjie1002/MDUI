@@ -1,0 +1,16 @@
+PODS:
+  - MDUI (0.0.1)
+
+DEPENDENCIES:
+  - MDUI (from `../`)
+
+EXTERNAL SOURCES:
+  MDUI:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MDUI: c037e9dde10b0b9f328b3aa6e3e10a399091fa1f
+
+PODFILE CHECKSUM: cba7f5ee33d4aea14d5d72bdc010d6fe676f07d1
+
+COCOAPODS: 1.7.4

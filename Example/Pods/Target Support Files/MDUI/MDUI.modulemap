@@ -1,0 +1,6 @@
+framework module MDUI {
+  umbrella header "MDUI-umbrella.h"
+
+  export *
+  module * { export * }
+}
