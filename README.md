@@ -1,3 +1,6 @@
+# 开发中 [查看进度](./progress.md)
+
+
 # MDUI
 
 [![CI Status](https://img.shields.io/travis/iyongjie@yeah.net/MDUI.svg?style=flat)](https://travis-ci.org/iyongjie@yeah.net/MDUI)
@@ -7,14 +10,9 @@
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
+第一次运行，执行pod install
 
 ## Installation
-
-MDUI is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'MDUI'
@@ -22,7 +20,8 @@ pod 'MDUI'
 
 ## Author
 
-iyongjie@yeah.net, yj.li@muheda.com
+[Anyong123456](https://github.com/Anyong123456)  
+[Iyongjie](https://github.com/Iyongjie)
 
 ## License
 
