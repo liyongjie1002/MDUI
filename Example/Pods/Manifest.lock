@@ -1,5 +1,9 @@
 PODS:
-  - MDUI (0.0.1)
+  - MDUI (0.0.1):
+    - MDUI/MDSearch (= 0.0.1)
+    - MDUI/Test (= 0.0.1)
+  - MDUI/MDSearch (0.0.1)
+  - MDUI/Test (0.0.1)
 
 DEPENDENCIES:
   - MDUI (from `../`)
@@ -9,7 +13,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MDUI: c037e9dde10b0b9f328b3aa6e3e10a399091fa1f
+  MDUI: 0c30b3aab0a1ad0b54db05b7d9b9c8963dca2284
 
 PODFILE CHECKSUM: cba7f5ee33d4aea14d5d72bdc010d6fe676f07d1
 
