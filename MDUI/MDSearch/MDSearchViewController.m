@@ -15,6 +15,15 @@
 @implementation MDSearchViewController
 
 #pragma mark life
+
++(instancetype)searchViewControllerWithHotSearches:(NSArray *)hots histories:(NSMutableArray *)histories placeholder:(NSString *)placeholder {
+    MDSearchViewController *searchVC = [[self alloc] init];
+    searchVC.hots = hots;
+    searchVC.histories = histories;
+    searchVC.searchBar.placeholder = placeholder;
+    return searchVC;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -96,16 +105,16 @@
     [self setHistoryArrWithSearchText:searchText];
 }
 - (void)setHistoryArrWithSearchText:(NSString *)searchText {
-    for (int i = 0; i < self.historys.count; i++) {
-        if ([_historys[i] isEqualToString:searchText]) {
-            [_historys removeObjectAtIndex:i];
+    for (int i = 0; i < self.histories.count; i++) {
+        if ([_histories[i] isEqualToString:searchText]) {
+            [_histories removeObjectAtIndex:i];
             break;
         }
     }
-    [_historys insertObject:searchText atIndex:0];
-    [NSKeyedArchiver archiveRootObject:_historys toFile:KMDHistorySearchPath];
+    [_histories insertObject:searchText atIndex:0];
+    [NSKeyedArchiver archiveRootObject:_histories toFile:KMDHistorySearchPath];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kMDHistoryNotificationName object:nil userInfo:@{@"history":_historys}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kMDHistoryNotificationName object:nil userInfo:@{@"history":_histories}];
 }
 - (void)searchCancelResponder {
     [self.searchBar resignFirstResponder];
@@ -199,11 +208,10 @@
 }
 -(MDSearchMainViewController *)mainVC {
     if (!_mainVC) {
-        _mainVC = [MDSearchMainViewController searchMainViewControllerWithHotSearches:@[@"111",@"222",@"333",] didSearchBlock:^(NSString *mainText) {
-            NSLog(@"%@",mainText);
+        _mainVC = [MDSearchMainViewController searchMainViewControllerWithHotSearches:self.hots histories:self.histories didSearchBlock:^(NSString *mainText) {
             [self setHistoryArrWithSearchText:mainText];
         }];
-        _mainVC.histories = self.historys;
+        _mainVC.histories = self.histories;
     }
     return _mainVC;
 }
@@ -222,14 +230,14 @@
     }
     return _resultVC;
 }
-- (NSMutableArray *)historys {
-    if (!_historys) {
-        _historys = [NSKeyedUnarchiver unarchiveObjectWithFile:KMDHistorySearchPath];
-        if (!_historys) {
-            self.historys = [NSMutableArray array];
+- (NSMutableArray *)histories {
+    if (!_histories) {
+        _histories = [NSKeyedUnarchiver unarchiveObjectWithFile:KMDHistorySearchPath];
+        if (!_histories) {
+            self.histories = [NSMutableArray array];
         }
     }
-    return _historys;
+    return _histories;
 }
 - (void)dealloc {
     NSLog(@"释放了");

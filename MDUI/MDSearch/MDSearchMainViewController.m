@@ -8,19 +8,149 @@
 #import "MDSearchMainViewController.h"
 #import "MDSearchConst.h"
 
-@interface MDSearchMainViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+
+@interface MDSearchMainCollectionViewCell : UICollectionViewCell
+
+@property (nonatomic, copy)     NSString   *title;
+
+@property (nonatomic, strong)   UILabel   *titleLabel;
 
 @end
+
+@implementation MDSearchMainCollectionViewCell
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self configUI];
+    }
+    return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.titleLabel.frame = self.bounds;
+}
+
+- (void)configUI {
+    self.backgroundColor = [UIColor whiteColor];
+    
+    [self.contentView addSubview:self.titleLabel];
+    self.contentView.backgroundColor = [UIColor clearColor];
+    
+    self.layer.cornerRadius = 4;
+    self.layer.masksToBounds = YES;
+}
+
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    self.titleLabel.text = title;
+}
+
+-(UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc]init];
+        _titleLabel.font = [UIFont systemFontOfSize:12];
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.backgroundColor  = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0f];
+        _titleLabel.textColor = [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0f];
+    }
+    return _titleLabel;
+}
+@end
+
+@protocol MDSearchMainReusableViewDelegate <NSObject>
+
+- (void)clearHistory;
+
+@end
+
+@interface MDSearchMainReusableView : UICollectionReusableView
+
+@property (nonatomic, strong)   UILabel   *titleLabel;
+
+@property (nonatomic, strong)   UIButton  *clearButton;
+
+@property (nonatomic, copy)     NSString  *title;
+
+@property (nonatomic, assign)   NSInteger section;
+
+@property (nonatomic, assign)   id<MDSearchMainReusableViewDelegate> delegate;
+
+@end
+
+@implementation MDSearchMainReusableView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self configUI];
+    }
+    return self;
+}
+
+- (void)configUI {
+    [self addSubview:self.titleLabel];
+}
+
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    self.titleLabel.text = title;
+}
+
+- (void)setSection:(NSInteger)section {
+    _section = section;
+    if (section == 1) {
+        [self addSubview:self.clearButton];
+    }
+}
+
+- (void)didClickClear {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(clearHistory)]) {
+        [self.delegate clearHistory];
+    }
+}
+
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kMDSearchMainHeaderLeftMargin, kMDSearchMainHeaderTopMargin, 100, kMDSearchMainHeaderHeight - 2*kMDSearchMainHeaderTopMargin)];
+        _titleLabel.font = [UIFont systemFontOfSize:15];
+        _titleLabel.textColor = [UIColor blackColor];
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    return _titleLabel;
+}
+
+- (UIButton *)clearButton {
+    if (!_clearButton) {
+        _clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        NSString  *filePath = [[NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] bundlePath]] pathForResource:@"md_clear" ofType:@"png"];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfFile:filePath]];
+        [_clearButton setImage:image forState:UIControlStateNormal];
+        CGFloat clearWidth = self.frame.size.height - 2*kMDSearchMainHeaderTopMargin;
+        [_clearButton setFrame:CGRectMake(self.frame.size.width - kMDSearchMainHeaderRightMargin - clearWidth, kMDSearchMainHeaderTopMargin, clearWidth, clearWidth)];
+        [_clearButton setImageEdgeInsets:UIEdgeInsetsMake(12.5, 25, 12.5, 0)];
+        [_clearButton addTarget:self action:@selector(didClickClear) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _clearButton;
+}
+@end
+
+
+
+@interface MDSearchMainViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MDSearchMainReusableViewDelegate>
+
+@end
+
 
 @implementation MDSearchMainViewController
 
 #pragma mark life
-+ (instancetype)searchMainViewControllerWithHotSearches:(NSArray *)hots
++ (instancetype)searchMainViewControllerWithHotSearches:(NSArray *)hots histories:(NSArray *)histories
                                          didSearchBlock:(MDSearchMainSelectedIndexPathBlock)block {
     
     MDSearchMainViewController *mainVC = [[MDSearchMainViewController alloc]init];
     mainVC.selectedIndexPathBlock = block;
     mainVC.hots = hots;
+    mainVC.histories = histories;
     return mainVC;
 }
 
@@ -60,8 +190,7 @@
     if ([self.dataSource respondsToSelector:@selector(searchMainView:numberOfItemsInSection:)]) {
         return [self.dataSource searchMainView:collectionView numberOfItemsInSection:section];
     }
-    // 0历史
-    // 1热门
+    // 默认，0历史 ，1热门
     return section ? self.hots.count : self.histories.count;
 }
 
@@ -70,26 +199,13 @@
         UICollectionViewCell *cell= [self.dataSource searchMainView:collectionView cellForItemAtIndexPath:indexPath];
         if (cell) return cell;
     }
-    
-    static NSString *cellID = @"MDSearchMainCellID";
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
-    UILabel *label = [[UILabel alloc]initWithFrame:cell.bounds];
-
-    [cell.contentView addSubview:label];
-    cell.contentView.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:12];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.backgroundColor  = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0f];
-    label.textColor = [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0f];
-    
+    // 默认cell
+    MDSearchMainCollectionViewCell *cell = (MDSearchMainCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"MDSearchMainCollectionViewCell" forIndexPath:indexPath];
     if (indexPath.section == 0) { // 历史
-        label.text = self.histories[indexPath.item];
-    }else {
-        label.text = _hots[indexPath.item];
+        cell.title = self.histories[indexPath.row];
+    }else if (indexPath.section == 1) { // 热门
+        cell.title = self.hots[indexPath.row];
     }
-    cell.layer.cornerRadius = 4;
-    cell.layer.masksToBounds = YES;
     return cell;
 }
 
@@ -101,30 +217,16 @@
             UICollectionReusableView *view = [self.dataSource searchMainView:collectionView viewForSupplementaryElementOfKind:kind atIndexPath:indexPath];
             return view;
         }
-        static NSString *viewID = @"MDSearchMainReusableView";
-        UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewID forIndexPath:indexPath];
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(kMDSearchMainHeaderLeftMargin, kMDSearchMainHeaderTopMargin, 100, kMDSearchMainHeaderHeight - 2*kMDSearchMainHeaderTopMargin)];
-        [view addSubview:label];
-        label.font = [UIFont systemFontOfSize:15];
-        label.textColor = [UIColor blackColor];
-        label.textAlignment = NSTextAlignmentLeft;
-        
-        if (indexPath.section == 0 ) { // 历史
-            label.text = @"最近搜索";
-            NSString  *filePath = [[NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] bundlePath]] pathForResource:@"md_clear" ofType:@"png"];
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfFile:filePath]];
-            UIButton *clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            [clearButton setImage:image forState:UIControlStateNormal];
-            CGFloat clearWidth = view.frame.size.height - 2*kMDSearchMainHeaderTopMargin;
-            [clearButton setFrame:CGRectMake(view.frame.size.width - kMDSearchMainHeaderRightMargin - clearWidth, kMDSearchMainHeaderTopMargin, clearWidth, clearWidth)];
-            [clearButton setImageEdgeInsets:UIEdgeInsetsMake(12.5, 25, 12.5, 0)];
-            [clearButton addTarget:self action:@selector(clearHistory) forControlEvents:UIControlEventTouchUpInside];
-            [view addSubview:clearButton];
+        // 默认分区头
+        MDSearchMainReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"MDSearchMainReusableView" forIndexPath:indexPath];
+        view.delegate = self;
+        if (indexPath.section == 0) {
+            view.title = @"历史搜索";
             if (self.histories.count == 0) {
                 return nil;
             }
-        }else if (indexPath.section == 1) { // 热门
-            label.text = @"热门搜索";
+        } else {
+            view.title = @"热门搜索";
             if (self.hots.count == 0) {
                 return nil;
             }
@@ -195,8 +297,8 @@
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor clearColor];
-        [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"MDSearchMainCellID"];
-        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MDSearchMainReusableView"];
+        [_collectionView registerClass:[MDSearchMainCollectionViewCell class] forCellWithReuseIdentifier:@"MDSearchMainCollectionViewCell"];
+        [_collectionView registerClass:[MDSearchMainReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MDSearchMainReusableView"];
     }
     return _collectionView;
 }

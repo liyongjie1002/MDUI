@@ -27,6 +27,7 @@
 		B73EC94B22E95C38009871FF /* rightImage576.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B73EC94A22E95C38009871FF /* rightImage576.jpg */; };
 		B73EC94F22E95FFC009871FF /* MDSearchDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73EC94E22E95FFC009871FF /* MDSearchDemoViewController.m */; };
 		B73EC96A22E99333009871FF /* MDSuggestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B73EC96922E99333009871FF /* MDSuggestTableViewCell.m */; };
+		B75569FD22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B75569FC22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		B73EC94E22E95FFC009871FF /* MDSearchDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDSearchDemoViewController.m; sourceTree = "<group>"; };
 		B73EC96822E99333009871FF /* MDSuggestTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDSuggestTableViewCell.h; sourceTree = "<group>"; };
 		B73EC96922E99333009871FF /* MDSuggestTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDSuggestTableViewCell.m; sourceTree = "<group>"; };
+		B75569FB22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDHuYaCollectionViewCell.h; sourceTree = "<group>"; };
+		B75569FC22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDHuYaCollectionViewCell.m; sourceTree = "<group>"; };
 		DB073372BFBC86DA46E5235F /* MDUI.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MDUI.podspec; path = ../MDUI.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
@@ -213,6 +216,8 @@
 				B73EC94E22E95FFC009871FF /* MDSearchDemoViewController.m */,
 				B73EC96822E99333009871FF /* MDSuggestTableViewCell.h */,
 				B73EC96922E99333009871FF /* MDSuggestTableViewCell.m */,
+				B75569FB22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.h */,
+				B75569FC22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -391,6 +396,7 @@
 			files = (
 				6003F59E195388D20070C39A /* MDAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* MDViewController.m in Sources */,
+				B75569FD22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m in Sources */,
 				B73EC94F22E95FFC009871FF /* MDSearchDemoViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				B73EC96A22E99333009871FF /* MDSuggestTableViewCell.m in Sources */,

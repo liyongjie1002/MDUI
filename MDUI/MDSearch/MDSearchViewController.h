@@ -24,8 +24,9 @@
 @property (nonatomic, strong) UIButton              *cancelButton;
 
 @property (nonatomic, strong) UIView                *contentView;
- 
-@property (nonatomic, strong) NSMutableArray        *historys;
+
+@property (nonatomic, copy)   NSArray               *hots;
+@property (nonatomic, strong) NSMutableArray        *histories;
 @property (nonatomic, strong) NSMutableArray        *others;
 
 // 是否有模糊查找
@@ -43,6 +44,7 @@
 
 - (void)setSuggests:(NSArray *)suggests;
 
++(instancetype)searchViewControllerWithHotSearches:(NSArray *)hots histories:(NSArray *)histories placeholder:(NSString *)placeholder;
 
 @end
 

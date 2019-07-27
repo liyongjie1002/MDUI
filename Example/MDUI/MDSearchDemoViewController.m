@@ -10,10 +10,15 @@
 #import "MDSearchViewController.h"
 #import "MDSearchConst.h"
 #import "MDSuggestTableViewCell.h"
+#import "MDHuYaCollectionViewCell.h"
 
-@interface MDSearchDemoViewController ()<UISearchBarDelegate, MDSearchViewControllerDelegate, MDSearchSuggestionViewDataSource>
+@interface MDSearchDemoViewController ()<UISearchBarDelegate, MDSearchViewControllerDelegate, MDSearchSuggestionViewDataSource,MDSearchMainViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray    *suggests;
+
+@property (nonatomic, copy)   NSArray           *hots;
+
+@property (nonatomic, strong) NSMutableArray    *histories;
 
 @end
 
@@ -27,15 +32,21 @@
     [self initSearchBar];
 }
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    MDSearchViewController *search = [[MDSearchViewController alloc]init];
+    _hots = @[@"曹操",@"夏侯惇",@"元歌",@"刘婵",@"凯",@"孙尚香",@"亚瑟"];
+    _histories = [NSKeyedUnarchiver unarchiveObjectWithFile:KMDHistorySearchPath];
+    if (!_histories) {
+        _histories = [NSMutableArray array];
+    }
+    MDSearchViewController *search = [MDSearchViewController searchViewControllerWithHotSearches:self.hots histories:self.histories placeholder:@"搜索英雄"];
     search.delegate = self;
     search.suggestVC.dataSource = self;
+    search.mainVC.dataSource = self;
     [self.navigationController pushViewController:search animated:YES];
 }
 
 -(void)initSearchBar {
     
-    for(int i =  0 ;i < _searchBar.subviews.count;i++){
+    for(int i =  0 ;i < self.searchBar.subviews.count;i++){
         UIView * backView = _searchBar.subviews[i];
         if ([backView isKindOfClass:NSClassFromString(@"UISearchBarBackground")] == YES) {
             [backView removeFromSuperview];
@@ -59,7 +70,27 @@
     UIView *searchTextField = [self.searchBar valueForKey:@"_searchField"];
     searchTextField.backgroundColor = [UIColor colorWithRed:234/255.0 green:235/255.0 blue:237/255.0 alpha:1];
 }
-#pragma mark 代理
+#pragma mark 搜索代理
+- (NSInteger)numberOfSectionsInSearchMainView:(UICollectionView *)searchMainView {
+    return 2;
+}
+- (NSInteger)searchMainView:(UICollectionView *)searchMainView numberOfItemsInSection:(NSInteger)section {
+    if (section == 0) {
+        return self.histories.count;
+    } else  if (section == 1) {
+        return self.histories.count;
+    }
+    return 2;
+}
+- (UICollectionViewCell *)searchMainView:(UICollectionView *)searchMainView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    MDHuYaCollectionViewCell *cell = [searchMainView dequeueReusableCellWithReuseIdentifier:@"MDHuYaCollectionViewCell" forIndexPath:indexPath];
+    cell.tit
+    return cell;
+}
+//- (UICollectionReusableView *)searchMainView:(UICollectionView *)searchMainView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath;
+//- (CGSize)searchMainView:(UICollectionView *)searchMainView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
+//- (CGSize)searchMainView:(UICollectionView *)searchMainView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
+#pragma mark 建议代理
 - (void)searchViewController:(MDSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
 {
     if (searchText.length) {

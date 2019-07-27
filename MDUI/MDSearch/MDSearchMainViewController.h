@@ -31,7 +31,7 @@ typedef void(^MDSearchMainSelectedIndexPathBlock)(NSString *mainText);
 
 @property (nonatomic, weak)   id<MDSearchMainViewDataSource>        dataSource;
 
-+ (instancetype)searchMainViewControllerWithHotSearches:(NSArray *)hots
++ (instancetype)searchMainViewControllerWithHotSearches:(NSArray *)hots histories:(NSArray *)histories
                                      didSearchBlock:(MDSearchMainSelectedIndexPathBlock)block;
 @end
 
