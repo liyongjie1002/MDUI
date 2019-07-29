@@ -30,6 +30,10 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		B73EC94B22E95C38009871FF /* rightImage576.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B73EC94A22E95C38009871FF /* rightImage576.jpg */; };
+		B73EC94F22E95FFC009871FF /* MDSearchDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73EC94E22E95FFC009871FF /* MDSearchDemoViewController.m */; };
+		B73EC96A22E99333009871FF /* MDSuggestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B73EC96922E99333009871FF /* MDSuggestTableViewCell.m */; };
+		B75569FD22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B75569FC22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +87,13 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		89D13E0C8008B98C2E460700 /* Pods_MDUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDUI_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11005FE0B730F6EA6A36229 /* Pods-MDUI_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDUI_Tests.release.xcconfig"; path = "Target Support Files/Pods-MDUI_Tests/Pods-MDUI_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		B73EC94A22E95C38009871FF /* rightImage576.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rightImage576.jpg; sourceTree = "<group>"; };
+		B73EC94D22E95FFC009871FF /* MDSearchDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDSearchDemoViewController.h; sourceTree = "<group>"; };
+		B73EC94E22E95FFC009871FF /* MDSearchDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDSearchDemoViewController.m; sourceTree = "<group>"; };
+		B73EC96822E99333009871FF /* MDSuggestTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDSuggestTableViewCell.h; sourceTree = "<group>"; };
+		B73EC96922E99333009871FF /* MDSuggestTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDSuggestTableViewCell.m; sourceTree = "<group>"; };
+		B75569FB22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDHuYaCollectionViewCell.h; sourceTree = "<group>"; };
+		B75569FC22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDHuYaCollectionViewCell.m; sourceTree = "<group>"; };
 		DB073372BFBC86DA46E5235F /* MDUI.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MDUI.podspec; path = ../MDUI.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
@@ -182,7 +193,9 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* MDViewController.h */,
 				6003F5A6195388D20070C39A /* MDViewController.m */,
+				B73EC94C22E95FEA009871FF /* Search */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
+				B73EC94A22E95C38009871FF /* rightImage576.jpg */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				04EE842822EF099700CAC974 /* ssss.png */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -230,6 +243,19 @@
 				7765506C008983787E69E66F /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		B73EC94C22E95FEA009871FF /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				B73EC94D22E95FFC009871FF /* MDSearchDemoViewController.h */,
+				B73EC94E22E95FFC009871FF /* MDSearchDemoViewController.m */,
+				B73EC96822E99333009871FF /* MDSuggestTableViewCell.h */,
+				B73EC96922E99333009871FF /* MDSuggestTableViewCell.m */,
+				B75569FB22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.h */,
+				B75569FC22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m */,
+			);
+			name = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,6 +346,7 @@
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				04EE842922EF099700CAC974 /* ssss.png in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				B73EC94B22E95C38009871FF /* rightImage576.jpg in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,10 +435,17 @@
 				04518A7922E9A1E5007C0E2B /* MDNaviToastView.m in Sources */,
 				04518A6A22E84B45007C0E2B /* MDToastManager.m in Sources */,
 				6003F5A7195388D20070C39A /* MDViewController.m in Sources */,
+
 				04518A6D22E84C9F007C0E2B /* MDToastView.m in Sources */,
 				04518A6222E84691007C0E2B /* MDToastStyle.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				04518A7322E94C0D007C0E2B /* MDToast.m in Sources */,
+
+				B75569FD22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m in Sources */,
+				B73EC94F22E95FFC009871FF /* MDSearchDemoViewController.m in Sources */,
+				6003F59A195388D20070C39A /* main.m in Sources */,
+				B73EC96A22E99333009871FF /* MDSuggestTableViewCell.m in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +577,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MDUI/MDUI-Prefix.pch";
 				INFOPLIST_FILE = "MDUI/MDUI-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -560,6 +595,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MDUI/MDUI-Prefix.pch";
 				INFOPLIST_FILE = "MDUI/MDUI-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

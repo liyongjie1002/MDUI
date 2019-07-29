@@ -7,7 +7,11 @@
 //
 
 #import "MDViewController.h"
+
 #import "MDToast.h"
+
+#import "MDSearchDemoViewController.h"
+
 
 @interface MDViewController ()
 
@@ -18,6 +22,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 //    self.view.backgroundColor = [UIColor orangeColor];
     
     UIButton *but = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -29,7 +34,25 @@
     UITextField *aa = [[UITextField alloc]initWithFrame:CGRectMake(200, 200, 100, 100)];
     [self.view addSubview:aa];
     
+
+    self.view.backgroundColor = [UIColor whiteColor];
+	// Do any additional setup after loading the view, typically from a nib.
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"点击了" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(100, 100, 100, 30)];
+    [btn addTarget:self action:@selector(clickAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+
 }
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+
+}
+-(void)clickAction {
+    MDSearchDemoViewController *vc = [[MDSearchDemoViewController alloc]init];
+
 
 - (void)aaa {
     
@@ -43,6 +66,9 @@
     style.messageAlignment = NSTextAlignmentCenter;
     style.backgroundColor = [UIColor yellowColor];
     [MDToast makeToast:@"实你查查城市快速吃每次老" title:@"会飞的房子" image:[UIImage imageNamed:@"ssss.png"] pattern:MDToastPatternNight duration:3 position:MDToastPositionCenter style:nil];
+
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 

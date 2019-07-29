@@ -9,7 +9,7 @@
     "file": "LICENSE"
   },
   "authors": {
-    "iyongjie@yeah.net": "yj.li@muheda.com"
+    "liyongjie": "iyongjie@yeah.net"
   },
   "source": {
     "git": "https://github.com/Iyongjie/MDUI.git",
@@ -18,5 +18,18 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "MDUI/Test/*.{h,m}"
+  "requires_arc": true,
+  "source_files": "MDUI/MDUI.h",
+  "public_header_files": "MDUI/MDUI.h",
+  "subspecs": [
+    {
+      "name": "MDSearch",
+      "source_files": "MDUI/MDSearch/*",
+      "resources": "MDUI/MDSearch/resources/*.png"
+    },
+    {
+      "name": "Test",
+      "source_files": "MDUI/Test/*"
+    }
+  ]
 }
