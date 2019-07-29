@@ -7,6 +7,7 @@
 //
 
 #import "MDViewController.h"
+#import "MDToast.h"
 
 @interface MDViewController ()
 
@@ -17,13 +18,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+//    self.view.backgroundColor = [UIColor orangeColor];
+    
+    UIButton *but = [UIButton buttonWithType:UIButtonTypeSystem];
+    but.frame = CGRectMake(100, 100, 100, 100);
+    but.backgroundColor = [UIColor cyanColor];
+    [but addTarget:self action:@selector(aaa) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:but];
+    
+    UITextField *aa = [[UITextField alloc]initWithFrame:CGRectMake(200, 200, 100, 100)];
+    [self.view addSubview:aa];
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)aaa {
+    
+//    [MDToast showToast:@"实你查查城市快速吃每次老开车的老成都零零落落施啊啊啊"];
+//    [MDToast showToast:@"ssssssss" position:MDToastPositionBottom];
+//    [MDToast showToast:@"大家看崇山峻岭看撒接口可促进出口了" pattern:MDToastPatternNight position:MDToastPositionCenter];
+    
+    MDToastStyle *style = [[MDToastStyle alloc] initWithDefaultStyle];
+    style.messageFont = [UIFont fontWithName:@"Zapfino" size:8.0];
+    style.messageColor = [UIColor redColor];
+    style.messageAlignment = NSTextAlignmentCenter;
+    style.backgroundColor = [UIColor yellowColor];
+    [MDToast makeToast:@"实你查查城市快速吃每次老" title:@"会飞的房子" image:[UIImage imageNamed:@"ssss.png"] pattern:MDToastPatternNight duration:3 position:MDToastPositionCenter style:nil];
 }
+
 
 @end
