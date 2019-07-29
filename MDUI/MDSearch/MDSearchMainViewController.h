@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^MDSearchMainSelectedIndexPathBlock)(NSString *mainText);
+typedef void(^MDSearchMainSelectedIndexPathBlock)(NSString *mainText, NSIndexPath *indexPath);
 
 @protocol MDSearchMainViewDataSource <NSObject>
 
@@ -31,7 +31,7 @@ typedef void(^MDSearchMainSelectedIndexPathBlock)(NSString *mainText);
 
 @property (nonatomic, weak)   id<MDSearchMainViewDataSource>        dataSource;
 
-+ (instancetype)searchMainViewControllerWithHotSearches:(NSArray *)hots histories:(NSArray *)histories
++ (instancetype)searchMainViewControllerWithHotSearches:(NSArray *)hots histories:(NSMutableArray *)histories
                                      didSearchBlock:(MDSearchMainSelectedIndexPathBlock)block;
 @end
 

@@ -48,12 +48,11 @@
         if (cell) return cell;
     }
     
-    static NSString *cellID = @"MDSearchSuggestionCellID";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCellId"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        cell.textLabel.text = self.suggests[indexPath.row];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCellId"];
     }
+    cell.textLabel.text = self.suggests[indexPath.row];
     return cell;
 }
 
@@ -71,7 +70,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (self.selectedIndexPathBlock) {
-        self.selectedIndexPathBlock(self.suggests[indexPath.row]);
+        self.selectedIndexPathBlock(self.suggests[indexPath.row],indexPath);
     }
 }
 #pragma mark set get
@@ -91,6 +90,8 @@
             self.automaticallyAdjustsScrollViewInsets = NO;
         }
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCellId"];
+        _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     }
     return _tableView;
 }
