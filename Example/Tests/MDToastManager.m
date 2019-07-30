@@ -19,8 +19,8 @@
 @interface MDToastManager ()
 
 @property (nonatomic, strong) UIWindow                          *backgroundWindow;
-@property (assign, nonatomic) MDToastPattern                    pattern;
-@property (assign, nonatomic) MDToastPosition                   position;
+@property (assign, nonatomic) MDToastPattern                    sharedPattern;
+@property (assign, nonatomic) MDToastPosition                   sharedPosition;
 @property (strong, nonatomic) MDToastStyle                      *sharedStyle;
 @property (nonatomic, strong) MDToastView                       *toastView;
 @property (nonatomic, strong) NSString                          *toastMessage;
@@ -30,6 +30,8 @@
 @property (nonatomic, strong)NSTimer *dismissTimer;
 @property (nonatomic, assign)BOOL isDuringAnimation;
 @property (nonatomic, assign)BOOL isCurrentlyOnScreen;
+@property (nonatomic, assign)BOOL isDefaultStyle;
+
 
 
 @end
@@ -50,8 +52,8 @@
     self = [super init];
     if (self) {
         self.sharedStyle = [[MDToastStyle alloc] initWithDefaultStyle];
-        self.pattern = MDToastPatternDay;
-        self.position = MDToastPositionBottom;
+        self.sharedPattern = MDToastPatternDay;
+        self.sharedPosition = MDToastPositionBottom;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onChangeStatusBarOrientationNotification:)
                                                      name:UIApplicationDidChangeStatusBarOrientationNotification
@@ -70,11 +72,11 @@
 
 #pragma mark - Singleton Methods
 + (void)setSharedStyle:(MDToastStyle *)sharedStyle {
-    [[MDToastManager sharedManager] setSharedStyle:sharedStyle];
+    [[self sharedManager] setSharedStyle:sharedStyle];
 }
 
 + (MDToastStyle *)sharedStyle {
-    return [[MDToastManager sharedManager] sharedStyle];
+    return [[self sharedManager] sharedStyle];
 }
 
 + (void)setSharedPosition:(MDToastPosition)sharedPosition {
@@ -127,9 +129,17 @@
         self.toastMessage = toastMessage;
         self.toastTitle = title;
         self.toastImage = image;
-        self.sharedStyle = style;
-        self.position = position;
-        self.pattern = pattern;
+        
+        if (style == nil) {
+            self.sharedStyle = [[MDToastStyle alloc]initWithDefaultStyle];
+            self.isDefaultStyle = YES;
+        } else {
+            self.sharedStyle = style;
+            self.isDefaultStyle = NO;
+        }
+        
+        self.sharedPosition = position;
+        self.sharedPattern = pattern;
         self.isCurrentlyOnScreen = NO;
         
         [self stopDismissTimer];
@@ -157,10 +167,10 @@
     self.toastView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
 
     // 初始化控件
-    CGSize toastSize = [self.toastView md_makeToastForMessage:self.toastMessage title:self.toastTitle image:self.toastImage style:self.sharedStyle pattern:self.pattern];
+    CGSize toastSize = [self.toastView md_makeToastForMessage:self.toastMessage title:self.toastTitle image:self.toastImage style:self.sharedStyle pattern:self.sharedPattern isDefaultStyle:self.isDefaultStyle];
     self.toastView.frame = CGRectMake(0, 0, toastSize.width, toastSize.height);
     // 设置控件position
-    CGPoint center = [self.toastView md_getToastCenterPointPosition:self.position];
+    CGPoint center = [self.toastView md_getToastCenterPointPosition:self.sharedPosition style:self.sharedStyle];
     CGFloat moveHeight = [self keyboardHeight] - (kScreenHeight- center.y - toastSize.height/2) > 0 ? [self keyboardHeight] : 0;
     self.toastView.center = CGPointMake(center.x, center.y - moveHeight);
     // 添加控件
@@ -222,7 +232,6 @@
 }
 
 #pragma mark - PrivateMethod
-
 - (void)onChangeStatusBarOrientationNotification:(NSNotification *)notification
 {
     if (self.isCurrentlyOnScreen) {

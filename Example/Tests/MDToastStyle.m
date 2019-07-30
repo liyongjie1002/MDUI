@@ -14,14 +14,14 @@
     self = [super init];
     if (self) {
         
-        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
+        self.backgroundColor = [UIColor clearColor];
         self.titleColor = [UIColor whiteColor];
         self.messageColor = [UIColor whiteColor];
-        self.maxWidthPercentage = 0.8;
+        self.maxWidthPercentage = 0.7;
         self.maxHeightPercentage = 0.8;
-        self.horizontalPadding = 10.0;
+        self.horizontalPadding = 20.0;
         self.verticalPadding = 10.0;
-        self.cornerRadius = 10.0;
+        self.cornerRadius = 8.0;
         self.titleFont = [UIFont boldSystemFontOfSize:16.0];
         self.messageFont = [UIFont systemFontOfSize:15.0];
         self.titleAlignment = NSTextAlignmentLeft;
@@ -33,7 +33,6 @@
         self.shadowRadius = 6.0;
         self.shadowOffset = CGSizeMake(4.0, 4.0);
         self.imageSize = CGSizeMake(80.0, 80.0);
-        self.activitySize = CGSizeMake(100.0, 100.0);
         self.fadeDuration = 0.2;
     }
     return self;
