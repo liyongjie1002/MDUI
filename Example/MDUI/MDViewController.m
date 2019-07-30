@@ -26,7 +26,7 @@
 //    self.view.backgroundColor = [UIColor orangeColor];
     
     UIButton *but = [UIButton buttonWithType:UIButtonTypeSystem];
-    but.frame = CGRectMake(100, 100, 100, 100);
+    but.frame = CGRectMake(200, 20, 100, 100);
     but.backgroundColor = [UIColor cyanColor];
     [but addTarget:self action:@selector(aaa) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:but];
@@ -52,8 +52,9 @@
 }
 -(void)clickAction {
     MDSearchDemoViewController *vc = [[MDSearchDemoViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 
-
+}
 - (void)aaa {
     
 //    [MDToast showToast:@"实你查查城市快速吃每次老开车的老成都零零落落施啊啊啊"];
@@ -66,8 +67,6 @@
     style.messageAlignment = NSTextAlignmentCenter;
     style.backgroundColor = [UIColor yellowColor];
     [MDToast makeToast:@"实你查查城市快速吃每次老" title:@"会飞的房子" image:[UIImage imageNamed:@"ssss.png"] pattern:MDToastPatternNight duration:3 position:MDToastPositionCenter style:nil];
-
-    [self.navigationController pushViewController:vc animated:YES];
 
 }
 
