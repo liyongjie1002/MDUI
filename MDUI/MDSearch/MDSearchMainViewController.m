@@ -72,7 +72,7 @@
 
 @property (nonatomic, copy)     NSString  *title;
 
-@property (nonatomic, assign)   NSInteger section;
+@property (nonatomic, assign)   BOOL      isHistory;
 
 @property (nonatomic, assign)   id<MDSearchMainReusableViewDelegate> delegate;
 
@@ -96,10 +96,12 @@
     self.titleLabel.text = title;
 }
 
-- (void)setSection:(NSInteger)section {
-    _section = section;
-    if (section == 1) {
+- (void)setIsHistory:(BOOL)isHistory {
+    _isHistory = isHistory;
+    if (_isHistory) {
         [self addSubview:self.clearButton];
+    } else {
+        [self.clearButton removeFromSuperview];
     }
 }
 
@@ -144,7 +146,7 @@
 @implementation MDSearchMainViewController
 
 #pragma mark life
-+ (instancetype)searchMainViewControllerWithHotSearches:(NSArray *)hots histories:(NSArray *)histories
++ (instancetype)searchMainViewControllerWithHotSearches:(NSArray *)hots histories:(NSMutableArray *)histories
                                          didSearchBlock:(MDSearchMainSelectedIndexPathBlock)block {
     
     MDSearchMainViewController *mainVC = [[MDSearchMainViewController alloc]init];
@@ -183,7 +185,10 @@
     if ([self.dataSource respondsToSelector:@selector(numberOfSectionsInSearchMainView:)]) {
         return [self.dataSource numberOfSectionsInSearchMainView:collectionView];
     }
-    return 2; // 默认只有热门和发现
+    if (self.histories.count != 0) {
+        return 2; // 历史不为空，有历史和热门
+    }
+    return 1; // 默认只有热门
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -191,7 +196,10 @@
         return [self.dataSource searchMainView:collectionView numberOfItemsInSection:section];
     }
     // 默认，0历史 ，1热门
-    return section ? self.hots.count : self.histories.count;
+    if (self.histories.count != 0) {
+        return section ? self.hots.count : self.histories.count;
+    }
+    return self.hots.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -201,11 +209,17 @@
     }
     // 默认cell
     MDSearchMainCollectionViewCell *cell = (MDSearchMainCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"MDSearchMainCollectionViewCell" forIndexPath:indexPath];
-    if (indexPath.section == 0) { // 历史
-        cell.title = self.histories[indexPath.row];
-    }else if (indexPath.section == 1) { // 热门
+    
+    if (self.histories.count != 0) {
+        if (indexPath.section == 0) { // 历史
+            cell.title = self.histories[indexPath.row];
+        }else if (indexPath.section == 1) { // 热门
+            cell.title = self.hots[indexPath.row];
+        }
+    }else {
         cell.title = self.hots[indexPath.row];
     }
+   
     return cell;
 }
 
@@ -217,18 +231,30 @@
             UICollectionReusableView *view = [self.dataSource searchMainView:collectionView viewForSupplementaryElementOfKind:kind atIndexPath:indexPath];
             return view;
         }
-        // 默认分区头
         MDSearchMainReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"MDSearchMainReusableView" forIndexPath:indexPath];
         view.delegate = self;
-        if (indexPath.section == 0) {
-            view.title = @"历史搜索";
-            if (self.histories.count == 0) {
-                return nil;
+        if (self.histories.count != 0) {
+            // 默认分区头
+            if (indexPath.section == 0) {
+                view.title = @"历史搜索";
+                view.isHistory = YES;
+                if (self.histories.count == 0) {
+                    return nil;
+                }
+            } else if(indexPath.section == 1){
+                view.title = @"热门搜索";
+                view.isHistory = NO;
+                if (self.hots.count == 0) {
+                    return nil;
+                }
             }
         } else {
-            view.title = @"热门搜索";
-            if (self.hots.count == 0) {
-                return nil;
+            if (indexPath.section == 0) {
+                view.title = @"热门搜索";
+                view.isHistory = NO;
+                if (self.hots.count == 0) {
+                    return nil;
+                }
             }
         }
         return view;
@@ -244,9 +270,13 @@
     }
     NSString *text = @"";
     CGSize size = CGSizeZero;
-    if (indexPath.section == 0) {
-        text = self.histories[indexPath.row];
-    }else if (indexPath.section == 1) {
+    if (self.histories.count != 0) {
+        if (indexPath.section == 0) {
+            text = self.histories[indexPath.row];
+        }else if (indexPath.section == 1) {
+            text = self.hots[indexPath.row];
+        }
+    }else {
         text = self.hots[indexPath.row];
     }
     size = [self textSizeWithFont:[UIFont systemFontOfSize:15]constrainedToSize:CGSizeMake(80, 23) lineBreakMode:NSLineBreakByWordWrapping text:text];
@@ -262,11 +292,17 @@
         CGSize size = [self.dataSource searchMainView:collectionView layout:collectionViewLayout referenceSizeForHeaderInSection:section];
         return size;
     }
-    if (section == 0) { // 历史
-        if (self.histories.count == 0) {
-            return CGSizeZero;
+    if (self.histories.count != 0) {
+        if (section == 0) { // 历史
+            if (self.histories.count == 0) {
+                return CGSizeZero;
+            }
+        }else if (section == 1) { // 热门
+            if (self.hots.count == 0) {
+                return CGSizeZero;
+            }
         }
-    }else if (section == 1) { // 热门
+    }else {
         if (self.hots.count == 0) {
             return CGSizeZero;
         }
@@ -281,14 +317,27 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if (self.selectedIndexPathBlock) {
-        if (indexPath.section == 0) {
-            self.selectedIndexPathBlock(self.histories[indexPath.item]);
-        }else if (indexPath.section == 1) {
-            self.selectedIndexPathBlock(self.hots[indexPath.item]);
+        if (self.histories.count != 0) {
+            if (indexPath.section == 0) {
+                self.selectedIndexPathBlock(self.histories[indexPath.item], indexPath);
+            }else if (indexPath.section == 1) {
+                self.selectedIndexPathBlock(self.hots[indexPath.item], indexPath);
+            }else {
+                self.selectedIndexPathBlock(@"", indexPath);
+            }
+        }else {
+            if (indexPath.section == 0) {
+                self.selectedIndexPathBlock(self.hots[indexPath.item], indexPath);
+            }else {
+                self.selectedIndexPathBlock(@"", indexPath);
+            }
         }
     }
 }
-
+- (void)scrollViewWillBeginDragging:(UITableView *)scrollView
+{
+    [self.view endEditing:YES];
+}
 #pragma mark lazy
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
@@ -299,6 +348,7 @@
         _collectionView.backgroundColor = [UIColor clearColor];
         [_collectionView registerClass:[MDSearchMainCollectionViewCell class] forCellWithReuseIdentifier:@"MDSearchMainCollectionViewCell"];
         [_collectionView registerClass:[MDSearchMainReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MDSearchMainReusableView"];
+        _collectionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     }
     return _collectionView;
 }

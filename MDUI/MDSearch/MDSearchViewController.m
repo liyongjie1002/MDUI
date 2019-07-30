@@ -21,16 +21,18 @@
     searchVC.hots = hots;
     searchVC.histories = histories;
     searchVC.searchBar.placeholder = placeholder;
+    [searchVC configUI];
+
     return searchVC;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self configUI];
-    
+  
     self.haveSuggest = YES;
-
+    
+    self.showResult = YES;
+    
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -100,11 +102,38 @@
     }
     [self setTextFieldBackgroundColor:[UIColor colorWithRed:234/255.0 green:235/255.0 blue:237/255.0 alpha:1]];
 }
-// 点击键盘搜索
-- (void)pushToSearchResultView:(NSString *)searchText {
+// 跳转到结果页
+- (void)pushToSearchResultView:(NSString *)searchText indexPath:(NSIndexPath *)indexPath {
+    self.searchBar.text = searchText;
     [self setHistoryArrWithSearchText:searchText];
+    
+    if (self.showResult) {// 在本页展示结果列表
+        if ([searchText isEqualToString:@""]) { // 为空，就是别的indexPath,直接跳转到下一页
+            self.didClickItemBlock(self, searchText, indexPath);
+            return;
+        }
+        self.resultVC.view.hidden = NO;
+        [self.contentView bringSubviewToFront:self.resultVC.view];
+        self.suggestVC.view.hidden = YES;
+        self.mainVC.view.hidden = YES;
+        // 顺便block出去
+        if (self.didClickItemBlock) {
+            self.didClickItemBlock(self, searchText, indexPath);
+        }
+    }else {
+        if (self.didClickItemBlock) { // 跳转到下一页展示，block出去，组件内部不做处理
+            self.didClickItemBlock(self, searchText, indexPath);
+        }
+    }
+}
+
+- (void)didClickResult:(NSIndexPath *)indexPath resultText:(NSString *)resultText {
+    if (self.resultBlock) {
+        self.resultBlock(self, resultText, indexPath);
+    }
 }
 - (void)setHistoryArrWithSearchText:(NSString *)searchText {
+    if ([searchText isEqualToString:@""]) return;
     for (int i = 0; i < self.histories.count; i++) {
         if ([_histories[i] isEqualToString:searchText]) {
             [_histories removeObjectAtIndex:i];
@@ -152,7 +181,7 @@
 }
 // 键盘点击搜索
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self pushToSearchResultView:searchBar.text];
+    [self pushToSearchResultView:searchBar.text indexPath:nil];
 }
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
@@ -208,8 +237,12 @@
 }
 -(MDSearchMainViewController *)mainVC {
     if (!_mainVC) {
-        _mainVC = [MDSearchMainViewController searchMainViewControllerWithHotSearches:self.hots histories:self.histories didSearchBlock:^(NSString *mainText) {
-            [self setHistoryArrWithSearchText:mainText];
+        kMDSearch_WeakSelf;
+        _mainVC = [MDSearchMainViewController searchMainViewControllerWithHotSearches:self.hots histories:self.histories didSearchBlock:^(NSString *mainText, NSIndexPath *indexPath) {
+            NSLog(@"%@-------%@",mainText, indexPath);
+            [weakSelf setHistoryArrWithSearchText:mainText];
+            [weakSelf.searchBar resignFirstResponder];
+            [weakSelf pushToSearchResultView:mainText indexPath:indexPath];
         }];
         _mainVC.histories = self.histories;
     }
@@ -217,16 +250,22 @@
 }
 -(MDSearchSuggestViewController *)suggestVC {
     if (!_suggestVC) {
-        _suggestVC = [MDSearchSuggestViewController searchSuggestionViewControllerWithIndexPathBlock:^(NSString *suggestText) {
-            NSLog(@"%@",suggestText);
+        kMDSearch_WeakSelf;
+        _suggestVC = [MDSearchSuggestViewController searchSuggestionViewControllerWithIndexPathBlock:^(NSString *suggestText, NSIndexPath *indexPath) {
+            NSLog(@"%@-------%@",suggestText, indexPath);
             [self setHistoryArrWithSearchText:suggestText];
+            [weakSelf.searchBar resignFirstResponder];
+            [weakSelf pushToSearchResultView:suggestText indexPath:indexPath];
         }];
     }
     return _suggestVC;
 }
 -(MDSearchResultViewController *)resultVC {
     if (!_resultVC) {
-        _resultVC = [[MDSearchResultViewController alloc]init]; 
+        kMDSearch_WeakSelf;
+        _resultVC = [MDSearchResultViewController searchResultViewControllerWithIndexPathBlock:^(NSString *resultText, NSIndexPath *indexPath) {
+            [weakSelf didClickResult:indexPath resultText:resultText];
+        }];
     }
     return _resultVC;
 }

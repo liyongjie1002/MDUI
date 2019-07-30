@@ -8,13 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface MDSearchDemoViewController : UIViewController
 
 @property (nonatomic, strong) UIView        *navigationBarView;
 @property (nonatomic, strong) UISearchBar   *searchBar;
 
 @end
-
-NS_ASSUME_NONNULL_END

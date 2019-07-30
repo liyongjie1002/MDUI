@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^MDSearchSuggestionSelectedIndexPathBlock)(NSString *suggestText);
+typedef void(^MDSearchSuggestionSelectedIndexPathBlock)(NSString *suggestText, NSIndexPath *indexPath);
 
 // 这个接口，让外界提供数据源
 @protocol MDSearchSuggestionViewDataSource <NSObject>

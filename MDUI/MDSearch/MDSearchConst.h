@@ -8,6 +8,9 @@
 #ifndef MDSearchConst_h
 #define MDSearchConst_h
 
+#define kMDSearch_WeakSelf __weak typeof(self) weakSelf = self;
+
+
 
 #define kMDSearchScreenWidth        [UIScreen mainScreen].bounds.size.width
 #define kMDSearchStatusBarHeight    [[UIApplication sharedApplication] statusBarFrame].size.height

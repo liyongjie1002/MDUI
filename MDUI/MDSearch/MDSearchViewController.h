@@ -11,6 +11,10 @@
 #import "MDSearchResultViewController.h"
 
 @class MDSearchViewController;
+typedef void(^MDSearchDidClickItemBlock)(MDSearchViewController *search, NSString *searchText, NSIndexPath *indexPath);
+
+typedef void(^MDSearchResultBlock)(MDSearchViewController *search, NSString *result, NSIndexPath *indexPath);
+
 @protocol MDSearchViewControllerDelegate <NSObject>
 - (void)searchViewController:(MDSearchViewController *)searchViewController
          searchTextDidChange:(UISearchBar *)searchBar
@@ -31,6 +35,8 @@
 
 // 是否有模糊查找
 @property (nonatomic, assign) BOOL                                  haveSuggest;
+// 在当前页展示结果页
+@property (nonatomic, assign) BOOL                                  showResult;
 
 @property (nonatomic, strong) MDSearchMainViewController            *mainVC;
 @property (nonatomic, strong) MDSearchSuggestViewController         *suggestVC;
@@ -38,13 +44,16 @@
 
 @property (nonatomic, weak)   id<MDSearchViewControllerDelegate>    delegate;
 
+@property (nonatomic, copy)   MDSearchDidClickItemBlock             didClickItemBlock;
+@property (nonatomic, copy)   MDSearchResultBlock                   resultBlock;
+
 #pragma mark set方法
 - (void)setSearhIcon:(UIImage *)image;
 - (void)setTextFieldBackgroundColor:(UIColor *)color;
 
 - (void)setSuggests:(NSArray *)suggests;
 
-+(instancetype)searchViewControllerWithHotSearches:(NSArray *)hots histories:(NSArray *)histories placeholder:(NSString *)placeholder;
++(instancetype)searchViewControllerWithHotSearches:(NSArray *)hots histories:(NSMutableArray *)histories placeholder:(NSString *)placeholder;
 
 @end
 
