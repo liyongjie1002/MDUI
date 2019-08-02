@@ -6,6 +6,7 @@
 //
 
 #import "MDSearchSuggestViewController.h"
+#import "MDSearchViewController.h"
 
 @interface MDSearchSuggestViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -70,7 +71,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (self.selectedIndexPathBlock) {
-        self.selectedIndexPathBlock(self.suggests[indexPath.row],indexPath);
+        self.selectedIndexPathBlock(self.suggests[indexPath.row],indexPath, MDSearchTypeSuggest);
     }
 }
 #pragma mark set get

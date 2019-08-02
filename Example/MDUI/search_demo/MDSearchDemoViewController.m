@@ -8,11 +8,14 @@
 
 #import "MDSearchDemoViewController.h"
 #import "MDSearchViewController.h"
-#import "MDSearchConst.h"
 #import "MDSuggestTableViewCell.h"
 #import "MDHuYaCollectionViewCell.h"
 #import "MDHuyaCollectionReusableView.h"
 #import "MDResultTableViewCell.h"
+#import "MDSearchDemoModel.h"
+
+#import <SafariServices/SafariServices.h>
+
 
 @interface MDSearchDemoViewController ()<UISearchBarDelegate, MDSearchViewControllerDelegate, MDSearchSuggestionViewDataSource,MDSearchMainViewDataSource, MDHuyaCollectionReusableViewDelegate, MDSearchResultViewDataSource>
 
@@ -24,13 +27,29 @@
 
 @property (nonatomic, copy)   NSArray           *news;
 
-@property (nonatomic, copy)   NSArray           *results;
+@property (nonatomic, strong) NSMutableArray    *results;
 
 @property (nonatomic, strong) MDSearchViewController    *searchVC;
 
 @end
 
 @implementation MDSearchDemoViewController
+
+-(void)realData {
+    [self.results removeAllObjects];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+    NSArray *array = dic[@"server_list"];
+    
+    NSLog(@"%@",array);
+    for (NSDictionary *tmp in array) {
+        MDSearchDemoModel   *model = [[MDSearchDemoModel alloc]initWithDic:tmp];
+        [self.results addObject:model];
+    }
+    self.searchVC.resultVC.results = self.results;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,36 +62,56 @@
     _news = @[@"周赛精彩推荐",@"全球总决赛",@"虎牙独家直播"];
     _hots = @[@"夏侯惇",@"元歌",@"庄周",@"凯",@"孙尚香",@"亚瑟",@"刘禅",@"甄姬",@"后羿",@"鲁班",@"妲己"];
     _histories = [NSKeyedUnarchiver unarchiveObjectWithFile:KMDHistorySearchPath];
-    _results = @[@"五虎上将",@"战神"];
+    _results = [NSMutableArray array];
     if (!_histories) {
         _histories = [NSMutableArray array];
     }
     MDSearchViewController *search = [MDSearchViewController searchViewControllerWithHotSearches:self.hots histories:self.histories placeholder:@"搜索英雄"];
+//    search.navigationBarView.backgroundColor = [UIColor redColor];
+    [search.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+    // 文字改变监听
     search.delegate = self;
+//    search.showResult = NO;
+    // 模糊查找 数据源
     search.suggestVC.dataSource = self;
+    [search.suggestVC.tableView registerClass:[MDSuggestTableViewCell class] forCellReuseIdentifier:@"MDSuggestTableViewCell"];
+    
+//     搜索页 数据源
     search.mainVC.dataSource = self;
     [search.mainVC.collectionView registerClass:[MDHuyaCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MDHuyaCollectionReusableView"];
     [search.mainVC.collectionView registerClass:[MDHuYaCollectionViewCell class] forCellWithReuseIdentifier:@"MDHuYaCollectionViewCell"];
     self.searchVC = search;
     kMDSearch_WeakSelf;
-    search.didClickItemBlock = ^(MDSearchViewController *searchVC, NSString *searchText, NSIndexPath *indexPath) {
-        weakSelf.
-        searchVC.resultVC.results = weakSelf.results;
-    };
-    
-    search.resultBlock = ^(MDSearchViewController *search, NSString *result, NSIndexPath *indexPath) {
+    // 类型区分解耦独立
+    search.didClickItemNoResultBlock = ^(MDSearchViewController *searchVC, NSString *searchText, NSIndexPath *indexPath, MDSearchType type) {
+        
         UIViewController *vc = [UIViewController new];
         vc.view.backgroundColor = [UIColor redColor];
         [weakSelf.navigationController pushViewController:vc animated:YES];
+
     };
+    search.didClickItemOtherBlock = ^(MDSearchViewController *search, NSString *searchText, NSIndexPath *indexPath, MDSearchType type) {
+        UIViewController *vc = [UIViewController new];
+        vc.view.backgroundColor = [UIColor greenColor];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    };
+    search.didClickItemResultBlock = ^(MDSearchViewController *search, NSString *searchText, NSIndexPath *indexPath, MDSearchType type) {
+        [weakSelf realData];
+    };
+    // 结果页回调
+    search.resultBlock = ^(MDSearchViewController *search, NSString *result, NSIndexPath *indexPath) {
+        MDSearchDemoModel *model = self.results[indexPath.row];
+        SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:model.server_url]];
+        [weakSelf.navigationController pushViewController:safariVC animated:YES];
+    };
+    // 结果页 数据源
     search.resultVC.dataSource = self;
     [search.resultVC.tableView registerClass:[MDResultTableViewCell class] forCellReuseIdentifier:@"MDResultTableViewCell"];
     [self.navigationController pushViewController:search animated:YES];
 }
 
 -(void)initSearchBar {
-    
-    for(int i =  0 ;i < self.searchBar.subviews.count;i++){
+    for(int i =  0 ;i < _searchBar.subviews.count;i++){
         UIView * backView = _searchBar.subviews[i];
         if ([backView isKindOfClass:NSClassFromString(@"UISearchBarBackground")] == YES) {
             [backView removeFromSuperview];
@@ -93,12 +132,15 @@
             }
         }
     }
+    _searchBar.backgroundColor = [UIColor grayColor];
     UIView *searchTextField = [self.searchBar valueForKey:@"_searchField"];
     searchTextField.backgroundColor = [UIColor colorWithRed:234/255.0 green:235/255.0 blue:237/255.0 alpha:1];
 }
 #pragma mark 分区头部代理
 - (void)clearHistory {
     [self.histories removeAllObjects];
+    [self.searchVC.mainVC.datas removeObjectAtIndex:0];
+    [self.searchVC.mainVC.datas removeObject:self.histories];
     [NSKeyedArchiver archiveRootObject:self.histories toFile:KMDHistorySearchPath];
     [self.searchVC.mainVC.collectionView reloadData];
 }
@@ -202,11 +244,11 @@
     return nil;
 }
 - (CGSize)searchMainView:(UICollectionView *)searchMainView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     CGSize size = CGSizeZero;
-    
+
     NSString *text = @"";
-    
+
     if (self.histories.count != 0) {
         if (indexPath.section == 0) {
             text = self.histories[indexPath.row];
@@ -230,51 +272,21 @@
     }
     return CGSizeZero;
 }
-- (CGSize)searchMainView:(UICollectionView *)searchMainView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    if (self.histories.count != 0) {
-        if (section == 0) { // 历史
-            if (self.histories.count == 0) {
-                return CGSizeZero;
-            }
-        }else if (section == 1) { // 热门
-            if (self.hots.count == 0) {
-                return CGSizeZero;
-            }
-        }else if (section == 2) {
-            if (self.news.count == 0) {
-                return CGSizeZero;
-            }
-        }
-    }else {
-        if (section == 0) {
-            if (self.hots.count == 0) {
-                return CGSizeZero;
-            }
-        }else if (section == 1) {
-            if (self.news.count == 0) {
-                return CGSizeZero;
-            }
-        }
-    }
-    return CGSizeMake(searchMainView.frame.size.width, 30);
-}
-#pragma mark 模糊搜索view自定义代理
+#pragma mark 文字改变代理
 - (void)searchViewController:(MDSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
 {
-    if (searchText.length) {
-
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSMutableArray *searchSuggestionsM = [NSMutableArray array];
-            for (int i = 0; i < arc4random_uniform(10); i++) {
-                NSString *searchSuggestion = [NSString stringWithFormat:@"模糊查找 %d", i];
-                [searchSuggestionsM addObject:searchSuggestion];
-            }
-            self.suggests = searchSuggestionsM;
-            [searchViewController setSuggests:searchSuggestionsM];
-        });
+    NSMutableArray *searchSuggestionsM = [NSMutableArray array];
+    for (int i = 0; i < arc4random_uniform(7); i++) {
+        NSString *searchSuggestion = [NSString stringWithFormat:@"模糊查找 %d good", i];
+        [searchSuggestionsM addObject:searchSuggestion];
+    }
+    self.suggests = searchSuggestionsM;
+    
+    if (searchViewController.haveSuggest) {
+        [searchViewController setSuggests:searchSuggestionsM];
     }
 }
-
+#pragma mark 建议页代理
 - (NSInteger)numberOfSectionsInSearchSuggestionView:(UITableView *)searchSuggestionView {
     return self.suggests.count != 0 ? 1 : 0;
 }
@@ -291,21 +303,17 @@
 }
 #pragma mark 结果页代理
 
-- (NSInteger)numberOfSectionsInSearchResultView:(UITableView *)searchSuggestionView {
-    return 1;
-}
 - (NSInteger)searchResultView:(UITableView *)searchResultView numberOfRowsInSection:(NSInteger)section {
     return self.results.count;
 }
 - (UITableViewCell *)searchResultView:(UITableView *)searchResultView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MDResultTableViewCell *cell = [searchResultView dequeueReusableCellWithIdentifier:@"MDResultTableViewCell"];
-    cell.name = self.results[indexPath.row];
+    
+    MDSearchDemoModel   *model = self.results[indexPath.row];
+    cell.name = model.resultName;
+    cell.model = model;
     return cell;
 }
-- (CGFloat)searchResultView:(UITableView *)searchResultView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
-}
-
 #pragma mark lazy
 - (UIView *)navigationBarView {
     if (!_navigationBarView) {

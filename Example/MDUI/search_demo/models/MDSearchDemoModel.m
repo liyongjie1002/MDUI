@@ -1,0 +1,26 @@
+//
+//  MDSearchDemoModel.m
+//  MDUI_Example
+//
+//  Created by 李永杰 on 2019/7/30.
+//  Copyright © 2019 iyongjie@yeah.net. All rights reserved.
+//
+
+#import "MDSearchDemoModel.h"
+
+@implementation MDSearchDemoModel
+
+- (instancetype)initWithDic:(NSDictionary *)dic {
+    if (self = [super init]) {
+        self.resultName = dic[@"server_name"];
+
+        self.server_code = dic[@"server_code"];
+        self.server_url  = dic[@"server_url"];
+        self.server_icon = dic[@"server_icon"];
+        self.uiModel.rowHeight = 100;
+        self.uiModel.textColor = [UIColor yellowColor];
+    }
+    return self;
+}
+
+@end

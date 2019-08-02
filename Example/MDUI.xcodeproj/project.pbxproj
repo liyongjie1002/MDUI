@@ -34,6 +34,9 @@
 		B73EC94F22E95FFC009871FF /* MDSearchDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73EC94E22E95FFC009871FF /* MDSearchDemoViewController.m */; };
 		B73EC96A22E99333009871FF /* MDSuggestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B73EC96922E99333009871FF /* MDSuggestTableViewCell.m */; };
 		B75569FD22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B75569FC22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m */; };
+		B782CC8622F0297F00D5178D /* MDSearchDemoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B782CC8522F0297F00D5178D /* MDSearchDemoModel.m */; };
+		B782CC8822F02FEA00D5178D /* demo.json in Resources */ = {isa = PBXBuildFile; fileRef = B782CC8722F02FEA00D5178D /* demo.json */; };
+		B782CC8E22F0397100D5178D /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = B782CC8D22F0397100D5178D /* face.png */; };
 		B7EA08B422EE8C1F002C8E46 /* MDHuyaCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EA08B322EE8C1F002C8E46 /* MDHuyaCollectionReusableView.m */; };
 		B7EA08BC22EF2F62002C8E46 /* MDResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EA08BB22EF2F62002C8E46 /* MDResultTableViewCell.m */; };
 /* End PBXBuildFile section */
@@ -96,6 +99,10 @@
 		B73EC96922E99333009871FF /* MDSuggestTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDSuggestTableViewCell.m; sourceTree = "<group>"; };
 		B75569FB22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDHuYaCollectionViewCell.h; sourceTree = "<group>"; };
 		B75569FC22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDHuYaCollectionViewCell.m; sourceTree = "<group>"; };
+		B782CC8422F0297F00D5178D /* MDSearchDemoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDSearchDemoModel.h; sourceTree = "<group>"; };
+		B782CC8522F0297F00D5178D /* MDSearchDemoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDSearchDemoModel.m; sourceTree = "<group>"; };
+		B782CC8722F02FEA00D5178D /* demo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = demo.json; sourceTree = "<group>"; };
+		B782CC8D22F0397100D5178D /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
 		B7EA08B222EE8C1F002C8E46 /* MDHuyaCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDHuyaCollectionReusableView.h; sourceTree = "<group>"; };
 		B7EA08B322EE8C1F002C8E46 /* MDHuyaCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDHuyaCollectionReusableView.m; sourceTree = "<group>"; };
 		B7EA08BA22EF2F62002C8E46 /* MDResultTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDResultTableViewCell.h; sourceTree = "<group>"; };
@@ -201,6 +208,7 @@
 				6003F5A6195388D20070C39A /* MDViewController.m */,
 				B7EA08B922EED7F7002C8E46 /* search_demo */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
+				B782CC8D22F0397100D5178D /* face.png */,
 				B73EC94A22E95C38009871FF /* rightImage576.jpg */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				04EE842822EF099700CAC974 /* ssss.png */,
@@ -251,9 +259,20 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		B782CC8322F0292600D5178D /* models */ = {
+			isa = PBXGroup;
+			children = (
+				B782CC8422F0297F00D5178D /* MDSearchDemoModel.h */,
+				B782CC8522F0297F00D5178D /* MDSearchDemoModel.m */,
+				B782CC8722F02FEA00D5178D /* demo.json */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		B7EA08B922EED7F7002C8E46 /* search_demo */ = {
 			isa = PBXGroup;
 			children = (
+				B782CC8322F0292600D5178D /* models */,
 				B73EC94D22E95FFC009871FF /* MDSearchDemoViewController.h */,
 				B73EC94E22E95FFC009871FF /* MDSearchDemoViewController.m */,
 				B73EC96822E99333009871FF /* MDSuggestTableViewCell.h */,
@@ -279,7 +298,7 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				ECEA05F4F5F82FB9E1429BDA /* [CP] Embed Pods Frameworks */,
+				7CEEDAEA7030FA6B8C900244 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -321,6 +340,7 @@
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
 						DevelopmentTeam = KNF25R344F;
+						ProvisioningStyle = Automatic;
 					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
@@ -354,7 +374,9 @@
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				B782CC8E22F0397100D5178D /* face.png in Resources */,
 				04EE842922EF099700CAC974 /* ssss.png in Resources */,
+				B782CC8822F02FEA00D5178D /* demo.json in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				B73EC94B22E95C38009871FF /* rightImage576.jpg in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
@@ -416,7 +438,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ECEA05F4F5F82FB9E1429BDA /* [CP] Embed Pods Frameworks */ = {
+		7CEEDAEA7030FA6B8C900244 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -445,19 +467,17 @@
 				04518A7922E9A1E5007C0E2B /* MDNaviToastView.m in Sources */,
 				04518A6A22E84B45007C0E2B /* MDToastManager.m in Sources */,
 				6003F5A7195388D20070C39A /* MDViewController.m in Sources */,
-
 				04518A6D22E84C9F007C0E2B /* MDToastView.m in Sources */,
 				04518A6222E84691007C0E2B /* MDToastStyle.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				04518A7322E94C0D007C0E2B /* MDToast.m in Sources */,
-
 				B75569FD22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m in Sources */,
 				B73EC94F22E95FFC009871FF /* MDSearchDemoViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				B782CC8622F0297F00D5178D /* MDSearchDemoModel.m in Sources */,
 				B7EA08BC22EF2F62002C8E46 /* MDResultTableViewCell.m in Sources */,
 				B7EA08B422EE8C1F002C8E46 /* MDHuyaCollectionReusableView.m in Sources */,
 				B73EC96A22E99333009871FF /* MDSuggestTableViewCell.m in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,14 +605,17 @@
 			baseConfigurationReference = 108CD1527D345EB2A9381A78 /* Pods-MDUI_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KNF25R344F;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MDUI/MDUI-Prefix.pch";
 				INFOPLIST_FILE = "MDUI/MDUI-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
 			};
@@ -603,14 +626,17 @@
 			baseConfigurationReference = 056EBCFBAA2D0E3455DAB58B /* Pods-MDUI_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KNF25R344F;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MDUI/MDUI-Prefix.pch";
 				INFOPLIST_FILE = "MDUI/MDUI-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
 			};

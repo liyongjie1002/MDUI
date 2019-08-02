@@ -7,7 +7,7 @@
 
 #import "MDSearchMainViewController.h"
 #import "MDSearchConst.h"
-
+#import "MDSearchViewController.h"
 
 @interface MDSearchMainCollectionViewCell : UICollectionViewCell
 
@@ -140,6 +140,7 @@
 
 @interface MDSearchMainViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MDSearchMainReusableViewDelegate>
 
+
 @end
 
 
@@ -162,6 +163,18 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeHistory:) name:kMDHistoryNotificationName object:nil];
 
+    self.datas = [NSMutableArray arrayWithObject: @{
+                                                    @"arr":self.hots,
+                                                    @"title":@"热门搜索"
+                                                    }];
+    
+    if (self.histories.count != 0) {
+        [self.datas insertObject:@{
+                                   @"arr":self.histories,
+                                   @"title":@"历史搜索"
+                                   } atIndex:0];
+    }
+
 }
 
 -(void)viewDidLayoutSubviews {
@@ -173,10 +186,18 @@
     NSDictionary *userInfo = notification.userInfo;
     NSMutableArray *history = userInfo[@"history"];
     self.histories = history;
+    if (self.datas.count == 1) {
+        [self.datas insertObject:@{
+                                   @"arr":self.histories,
+                                   @"title":@"历史搜索"
+                                   } atIndex:0];
+    }
     [self.collectionView reloadData];
 }
 - (void)clearHistory {
     [self.histories removeAllObjects];
+    [self.datas removeObjectAtIndex:0];
+    [self.datas removeObject:self.histories];
     [NSKeyedArchiver archiveRootObject:self.histories toFile:KMDHistorySearchPath];
     [self.collectionView reloadData];
 }
@@ -185,21 +206,17 @@
     if ([self.dataSource respondsToSelector:@selector(numberOfSectionsInSearchMainView:)]) {
         return [self.dataSource numberOfSectionsInSearchMainView:collectionView];
     }
-    if (self.histories.count != 0) {
-        return 2; // 历史不为空，有历史和热门
-    }
-    return 1; // 默认只有热门
+    return self.datas.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if ([self.dataSource respondsToSelector:@selector(searchMainView:numberOfItemsInSection:)]) {
         return [self.dataSource searchMainView:collectionView numberOfItemsInSection:section];
     }
-    // 默认，0历史 ，1热门
-    if (self.histories.count != 0) {
-        return section ? self.hots.count : self.histories.count;
-    }
-    return self.hots.count;
+    
+    NSDictionary *dic = self.datas[section];
+    NSArray  *array = dic[@"arr"];
+    return array.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -207,19 +224,12 @@
         UICollectionViewCell *cell= [self.dataSource searchMainView:collectionView cellForItemAtIndexPath:indexPath];
         if (cell) return cell;
     }
+    
+    NSDictionary *dic = self.datas[indexPath.section];
+    NSArray  *array = dic[@"arr"];
     // 默认cell
     MDSearchMainCollectionViewCell *cell = (MDSearchMainCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"MDSearchMainCollectionViewCell" forIndexPath:indexPath];
-    
-    if (self.histories.count != 0) {
-        if (indexPath.section == 0) { // 历史
-            cell.title = self.histories[indexPath.row];
-        }else if (indexPath.section == 1) { // 热门
-            cell.title = self.hots[indexPath.row];
-        }
-    }else {
-        cell.title = self.hots[indexPath.row];
-    }
-   
+    cell.title = array[indexPath.row];
     return cell;
 }
 
@@ -233,29 +243,18 @@
         }
         MDSearchMainReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"MDSearchMainReusableView" forIndexPath:indexPath];
         view.delegate = self;
-        if (self.histories.count != 0) {
-            // 默认分区头
-            if (indexPath.section == 0) {
-                view.title = @"历史搜索";
-                view.isHistory = YES;
-                if (self.histories.count == 0) {
-                    return nil;
-                }
-            } else if(indexPath.section == 1){
-                view.title = @"热门搜索";
-                view.isHistory = NO;
-                if (self.hots.count == 0) {
-                    return nil;
-                }
-            }
-        } else {
-            if (indexPath.section == 0) {
-                view.title = @"热门搜索";
-                view.isHistory = NO;
-                if (self.hots.count == 0) {
-                    return nil;
-                }
-            }
+        
+        NSDictionary *dic = self.datas[indexPath.section];
+        NSString *title = dic[@"title"];
+        NSArray  *array = dic[@"arr"];
+        view.title = title;
+        if ([title isEqualToString:@"历史搜索"]) {
+            view.isHistory = YES;
+        }else {
+            view.isHistory = NO;
+        }
+        if (array.count == 0) {
+            return nil;
         }
         return view;
     }
@@ -268,18 +267,10 @@
         CGSize size = [self.dataSource searchMainView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:indexPath];
         return size;
     }
-    NSString *text = @"";
-    CGSize size = CGSizeZero;
-    if (self.histories.count != 0) {
-        if (indexPath.section == 0) {
-            text = self.histories[indexPath.row];
-        }else if (indexPath.section == 1) {
-            text = self.hots[indexPath.row];
-        }
-    }else {
-        text = self.hots[indexPath.row];
-    }
-    size = [self textSizeWithFont:[UIFont systemFontOfSize:15]constrainedToSize:CGSizeMake(80, 23) lineBreakMode:NSLineBreakByWordWrapping text:text];
+    NSDictionary *dic = self.datas[indexPath.section];
+    NSArray  *array = dic[@"arr"];
+    NSString *text = array[indexPath.row];
+    CGSize size = [self textSizeWithFont:[UIFont systemFontOfSize:15]constrainedToSize:CGSizeMake(80, 23) lineBreakMode:NSLineBreakByWordWrapping text:text];
     if (size.width > kMDSearchScreenWidth - 2*kMDSearchMainHeaderLeftMargin - 20) {
         size.width = kMDSearchScreenWidth - 2*kMDSearchMainHeaderLeftMargin - 20;
     }
@@ -292,21 +283,6 @@
         CGSize size = [self.dataSource searchMainView:collectionView layout:collectionViewLayout referenceSizeForHeaderInSection:section];
         return size;
     }
-    if (self.histories.count != 0) {
-        if (section == 0) { // 历史
-            if (self.histories.count == 0) {
-                return CGSizeZero;
-            }
-        }else if (section == 1) { // 热门
-            if (self.hots.count == 0) {
-                return CGSizeZero;
-            }
-        }
-    }else {
-        if (self.hots.count == 0) {
-            return CGSizeZero;
-        }
-    }
     return CGSizeMake(collectionView.frame.size.width, kMDSearchMainHeaderHeight);
 }
 
@@ -315,27 +291,20 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     if (self.selectedIndexPathBlock) {
-        if (self.histories.count != 0) {
-            if (indexPath.section == 0) {
-                self.selectedIndexPathBlock(self.histories[indexPath.item], indexPath);
-            }else if (indexPath.section == 1) {
-                self.selectedIndexPathBlock(self.hots[indexPath.item], indexPath);
-            }else {
-                self.selectedIndexPathBlock(@"", indexPath);
-            }
-        }else {
-            if (indexPath.section == 0) {
-                self.selectedIndexPathBlock(self.hots[indexPath.item], indexPath);
-            }else {
-                self.selectedIndexPathBlock(@"", indexPath);
-            }
+        NSInteger count = self.datas.count;
+        if (indexPath.section + 1 > count ) { // 超出历史和热门
+            self.selectedIndexPathBlock(@"", indexPath, MDSearchTypeOther);
+        } else {
+            NSDictionary *dic = self.datas[indexPath.section];
+            NSArray  *array = dic[@"arr"];
+            NSString *text = array[indexPath.row];
+            self.selectedIndexPathBlock(text, indexPath,MDSearchTypeMain);
         }
     }
 }
-- (void)scrollViewWillBeginDragging:(UITableView *)scrollView
-{
+- (void)scrollViewWillBeginDragging:(UITableView *)scrollView {
     [self.view endEditing:YES];
 }
 #pragma mark lazy

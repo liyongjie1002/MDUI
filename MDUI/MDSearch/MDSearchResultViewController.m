@@ -6,6 +6,7 @@
 //
 
 #import "MDSearchResultViewController.h"
+#import "MDSearchResultBaseModel.h"
 
 @interface MDSearchResultViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -53,7 +54,9 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCellId"];
     }
-    cell.textLabel.text = self.results[indexPath.row];
+    MDSearchResultBaseModel *resultModel = self.results[indexPath.row];
+    cell.textLabel.text = resultModel.resultName;
+    cell.textLabel.textColor = resultModel.uiModel.textColor;
     return cell;
 }
 
@@ -62,7 +65,20 @@
     if ([self.dataSource respondsToSelector:@selector(searchResultView:heightForRowAtIndexPath:)]) {
         return [self.dataSource searchResultView:tableView heightForRowAtIndexPath:indexPath];
     }
-    return 44.0;
+    MDSearchResultBaseModel *resultModel = self.results[indexPath.row];
+    return resultModel.uiModel.rowHeight;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if ([self.dataSource respondsToSelector:@selector(searchResultView:viewForHeaderInSection:)]) {
+        [self.dataSource searchResultView:tableView viewForHeaderInSection:section];
+    }
+    return nil;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if ([self.dataSource respondsToSelector:@selector(searchResultView:heightForHeaderInSection:)]) {
+        [self.dataSource searchResultView:tableView heightForHeaderInSection:section];
+    }
+    return 0;
 }
 
 #pragma mark - UITableViewDelegate
@@ -75,7 +91,7 @@
     }
 }
 #pragma mark set get
-- (void)setResults:(NSArray *)results {
+- (void)setResults:(NSMutableArray *)results {
     _results = results;
     [self.tableView reloadData];
 }

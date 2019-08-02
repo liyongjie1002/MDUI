@@ -10,6 +10,12 @@
 
 @interface MDSearchViewController ()<UISearchBarDelegate, UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) UIView                *contentView;
+
+@property (nonatomic, copy)   NSArray               *hots;
+
+@property (nonatomic, strong) NSMutableArray        *histories;
+
 @end
 
 @implementation MDSearchViewController
@@ -29,9 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    self.haveSuggest = YES;
-    
-    self.showResult = YES;
+    [self initProperty];
     
 }
 -(void)viewWillAppear:(BOOL)animated {
@@ -45,7 +49,6 @@
     [super viewWillDisappear:animated];
     [self.searchBar resignFirstResponder];
 }
-
 #pragma mark private
 -(void)configUI {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -71,6 +74,10 @@
     self.suggestVC.view.hidden = YES;
     [self.contentView bringSubviewToFront:self.mainVC.view];
     
+}
+-(void)initProperty {
+    self.haveSuggest = YES;
+    self.showResult  = YES;
 }
 -(void)initSearchBar {
     
@@ -103,27 +110,46 @@
     [self setTextFieldBackgroundColor:[UIColor colorWithRed:234/255.0 green:235/255.0 blue:237/255.0 alpha:1]];
 }
 // 跳转到结果页
-- (void)pushToSearchResultView:(NSString *)searchText indexPath:(NSIndexPath *)indexPath {
+- (void)pushToSearchResultView:(NSString *)searchText indexPath:(NSIndexPath *)indexPath type:(MDSearchType)type {
     self.searchBar.text = searchText;
-    [self setHistoryArrWithSearchText:searchText];
     
-    if (self.showResult) {// 在本页展示结果列表
-        if ([searchText isEqualToString:@""]) { // 为空，就是别的indexPath,直接跳转到下一页
-            self.didClickItemBlock(self, searchText, indexPath);
+    if (self.showResult) {
+        if (type == MDSearchTypeOther) { // other,直接跳转到下一页
+            self.didClickItemOtherBlock(self, searchText, indexPath, type);
             return;
         }
+        [self showRelatedView:MDSearchTypeResult];
+        // 顺便block出去,请求网络数据
+        if (self.didClickItemResultBlock) {
+            self.didClickItemResultBlock(self, searchText, indexPath, type);
+        }
+    }else {
+        if (type == MDSearchTypeOther) { // other,直接跳转到下一页
+            self.didClickItemOtherBlock(self, searchText, indexPath, type);
+            return;
+        }
+        if (self.didClickItemNoResultBlock) { // 跳转到下一页展示，block出去，组件内部不做处理
+            self.didClickItemNoResultBlock(self, searchText, indexPath, type);
+        }
+    }
+}
+
+- (void)showRelatedView:(MDSearchType)type {
+    if (type == MDSearchTypeMain) {
+        self.mainVC.view.hidden = NO;
+        [self.contentView bringSubviewToFront:self.mainVC.view];
+        self.suggestVC.view.hidden = YES;
+        self.resultVC.view.hidden = YES;
+    } else if (type == MDSearchTypeSuggest) {
+        self.suggestVC.view.hidden = NO;
+        [self.contentView bringSubviewToFront:self.suggestVC.view];
+        self.mainVC.view.hidden = YES;
+        self.resultVC.view.hidden = YES;
+    } else if (type == MDSearchTypeResult) {
         self.resultVC.view.hidden = NO;
         [self.contentView bringSubviewToFront:self.resultVC.view];
         self.suggestVC.view.hidden = YES;
         self.mainVC.view.hidden = YES;
-        // 顺便block出去
-        if (self.didClickItemBlock) {
-            self.didClickItemBlock(self, searchText, indexPath);
-        }
-    }else {
-        if (self.didClickItemBlock) { // 跳转到下一页展示，block出去，组件内部不做处理
-            self.didClickItemBlock(self, searchText, indexPath);
-        }
     }
 }
 
@@ -152,25 +178,16 @@
 // 文字改变,切换view，默认搜索页/建议页/结果页
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (searchBar.text == nil || [searchBar.text length] <= 0) { // 依然显示默认页
-        self.mainVC.view.hidden = NO;
-        [self.contentView bringSubviewToFront:self.mainVC.view];
-        self.suggestVC.view.hidden = YES;
-        self.resultVC.view.hidden = YES;
+        [self showRelatedView:MDSearchTypeMain];
     } else {
         if (_haveSuggest) {
-            self.suggestVC.view.hidden = NO;
-            [self.contentView bringSubviewToFront:self.suggestVC.view];
-            self.mainVC.view.hidden = YES;
-            self.resultVC.view.hidden = YES;
+            [self showRelatedView:MDSearchTypeSuggest];
             // 模糊查找
             if ([self.delegate respondsToSelector:@selector(searchViewController:searchTextDidChange:searchText:)]) {
                 [self.delegate searchViewController:self searchTextDidChange:searchBar searchText:searchText];
             }
         } else {
-            self.mainVC.view.hidden = NO;
-            [self.contentView bringSubviewToFront:self.mainVC.view];
-            self.suggestVC.view.hidden = YES;
-            self.resultVC.view.hidden = YES;
+            [self showRelatedView:MDSearchTypeMain];
         }
     }
 }
@@ -181,7 +198,8 @@
 }
 // 键盘点击搜索
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self pushToSearchResultView:searchBar.text indexPath:nil];
+    [self setHistoryArrWithSearchText: searchBar.text];
+    [self pushToSearchResultView:searchBar.text indexPath:nil type:MDSearchTypeMain];
 }
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
@@ -197,7 +215,7 @@
         return YES;// 响应手势
     }
 }
-#pragma mark set
+#pragma mark - set
 -(void)setSearhIcon:(UIImage *)image {
     [self.searchBar setImage:image forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
 }
@@ -206,7 +224,6 @@
     searchTextField.backgroundColor = color;
 }
 -(void)setSuggests:(NSArray *)suggests {
-    
     if (self.haveSuggest) {
         self.suggestVC.suggests = suggests;
     }
@@ -238,24 +255,21 @@
 -(MDSearchMainViewController *)mainVC {
     if (!_mainVC) {
         kMDSearch_WeakSelf;
-        _mainVC = [MDSearchMainViewController searchMainViewControllerWithHotSearches:self.hots histories:self.histories didSearchBlock:^(NSString *mainText, NSIndexPath *indexPath) {
-            NSLog(@"%@-------%@",mainText, indexPath);
+        _mainVC = [MDSearchMainViewController searchMainViewControllerWithHotSearches:self.hots histories:self.histories didSearchBlock:^(NSString *mainText, NSIndexPath *indexPath, NSInteger type) {
             [weakSelf setHistoryArrWithSearchText:mainText];
             [weakSelf.searchBar resignFirstResponder];
-            [weakSelf pushToSearchResultView:mainText indexPath:indexPath];
+            [weakSelf pushToSearchResultView:mainText indexPath:indexPath type:type];
         }];
-        _mainVC.histories = self.histories;
     }
     return _mainVC;
 }
 -(MDSearchSuggestViewController *)suggestVC {
     if (!_suggestVC) {
         kMDSearch_WeakSelf;
-        _suggestVC = [MDSearchSuggestViewController searchSuggestionViewControllerWithIndexPathBlock:^(NSString *suggestText, NSIndexPath *indexPath) {
-            NSLog(@"%@-------%@",suggestText, indexPath);
+        _suggestVC = [MDSearchSuggestViewController searchSuggestionViewControllerWithIndexPathBlock:^(NSString *suggestText, NSIndexPath *indexPath, NSInteger type) {
             [self setHistoryArrWithSearchText:suggestText];
             [weakSelf.searchBar resignFirstResponder];
-            [weakSelf pushToSearchResultView:suggestText indexPath:indexPath];
+            [weakSelf pushToSearchResultView:suggestText indexPath:indexPath type:type];
         }];
     }
     return _suggestVC;
