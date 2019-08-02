@@ -17,8 +17,7 @@
         self.server_code = dic[@"server_code"];
         self.server_url  = dic[@"server_url"];
         self.server_icon = dic[@"server_icon"];
-        self.uiModel.rowHeight = 100;
-        self.uiModel.textColor = [UIColor yellowColor];
+        self.uiModel.textColor = [UIColor blueColor];
     }
     return self;
 }

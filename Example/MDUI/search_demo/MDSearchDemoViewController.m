@@ -15,9 +15,9 @@
 #import "MDSearchDemoModel.h"
 
 #import <SafariServices/SafariServices.h>
+#import "MDPushTransition.h"
 
-
-@interface MDSearchDemoViewController ()<UISearchBarDelegate, MDSearchViewControllerDelegate, MDSearchSuggestionViewDataSource,MDSearchMainViewDataSource, MDHuyaCollectionReusableViewDelegate, MDSearchResultViewDataSource>
+@interface MDSearchDemoViewController ()<UISearchBarDelegate, MDSearchViewControllerDelegate, MDSearchSuggestionViewDataSource,MDSearchMainViewDataSource, MDHuyaCollectionReusableViewDelegate, MDSearchResultViewDataSource, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray    *suggests;
 
@@ -57,6 +57,14 @@
     [self.view addSubview:self.navigationBarView];
     [self.navigationBarView addSubview:self.searchBar];
     [self initSearchBar];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.delegate = self;
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.delegate= (id)self;
 }
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     _news = @[@"周赛精彩推荐",@"全球总决赛",@"虎牙独家直播"];
@@ -135,6 +143,13 @@
     _searchBar.backgroundColor = [UIColor grayColor];
     UIView *searchTextField = [self.searchBar valueForKey:@"_searchField"];
     searchTextField.backgroundColor = [UIColor colorWithRed:234/255.0 green:235/255.0 blue:237/255.0 alpha:1];
+}
+#pragma mark 导航动画代理
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
+    if (operation == UINavigationControllerOperationPush) {
+        return [[MDPushTransition alloc] init];
+    }
+    return nil;
 }
 #pragma mark 分区头部代理
 - (void)clearHistory {
@@ -287,9 +302,7 @@
     }
 }
 #pragma mark 建议页代理
-- (NSInteger)numberOfSectionsInSearchSuggestionView:(UITableView *)searchSuggestionView {
-    return self.suggests.count != 0 ? 1 : 0;
-}
+
 - (NSInteger)searchSuggestionView:(UITableView *)searchSuggestionView numberOfRowsInSection:(NSInteger)section {
     return self.suggests.count;
 }
@@ -297,9 +310,6 @@
     MDSuggestTableViewCell *cell = [[MDSuggestTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MDSuggestTableViewCell"];
     cell.name = self.suggests[indexPath.row];
     return cell;
-}
-- (CGFloat)searchSuggestionView:(UITableView *)searchSuggestionView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
 }
 #pragma mark 结果页代理
 
@@ -313,6 +323,10 @@
     cell.name = model.resultName;
     cell.model = model;
     return cell;
+}
+- (CGFloat)searchResultView:(UITableView *)searchResultView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MDSearchDemoModel   *model = self.results[indexPath.row];
+    return model.uiModel.rowHeight + indexPath.row*2;
 }
 #pragma mark lazy
 - (UIView *)navigationBarView {
