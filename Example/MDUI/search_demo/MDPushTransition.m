@@ -23,8 +23,6 @@
     
     UIView* toView = nil;
     UIView* fromView = nil;
-    //UITransitionContextFromViewKey和UITransitionContextToViewKey定义在iOS8.0以后的SDK中，所以在iOS8.0以下SDK中将toViewController和fromViewController的view设置给toView和fromView
-    //iOS8.0 之前和之后view的层次结构发生变化，所以iOS8.0以后UITransitionContextFromViewKey获得view并不是fromViewController的view
     if ([transitionContext respondsToSelector:@selector(viewForKey:)]) {
         fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
         toView = [transitionContext viewForKey:UITransitionContextToViewKey];
@@ -38,10 +36,10 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
-    toView.frame = CGRectMake(0, height, width, height);
+//    toView.frame = CGRectMake(0, height, width, height);
     toView.alpha = 0;
     [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-        toView.frame = CGRectMake(0, 0, width, height);
+//        toView.frame = CGRectMake(0, 0, width, height);
         toView.alpha = 1;
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:YES];

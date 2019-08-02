@@ -140,7 +140,7 @@
             }
         }
     }
-    _searchBar.backgroundColor = [UIColor grayColor];
+//    _searchBar.backgroundColor = [UIColor grayColor];
     UIView *searchTextField = [self.searchBar valueForKey:@"_searchField"];
     searchTextField.backgroundColor = [UIColor colorWithRed:234/255.0 green:235/255.0 blue:237/255.0 alpha:1];
 }
