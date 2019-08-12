@@ -12,16 +12,19 @@ typedef void(^MDSearchResultSelectedIndexPathBlock)(NSString *resultText, NSInde
 // 这个接口，让外界提供数据源
 @protocol MDSearchResultViewDataSource <NSObject>
 
-- (NSInteger)numberOfSectionsInSearchResultView:(UITableView *)searchSuggestionView;
 - (NSInteger)searchResultView:(UITableView *)searchResultView numberOfRowsInSection:(NSInteger)section;
 - (UITableViewCell *)searchResultView:(UITableView *)searchResultView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+@optional
+- (NSInteger)numberOfSectionsInSearchResultView:(UITableView *)searchResultView;
 - (CGFloat)searchResultView:(UITableView *)searchResultView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-
+- (CGFloat)searchResultView:(UITableView *)searchResultView heightForHeaderInSection:(NSInteger)section;
+- (UIView *)searchResultView:(UITableView *)searchResultView viewForHeaderInSection:(NSInteger)section;
+ 
 @end
 
 @interface MDSearchResultViewController : UIViewController
 
-@property (nonatomic, copy)     NSArray     *results;
+@property (nonatomic, strong)   NSMutableArray                          *results;
 @property (nonatomic, weak)     id<MDSearchResultViewDataSource>        dataSource;
 @property (nonatomic, copy)     MDSearchResultSelectedIndexPathBlock    selectedIndexPathBlock;
 @property (nonatomic, strong)   UITableView *tableView;

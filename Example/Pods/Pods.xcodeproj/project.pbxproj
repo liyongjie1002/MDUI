@@ -7,30 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07446A77306ABD1620352CDEC71CC318 /* MDUI.h in Headers */ = {isa = PBXBuildFile; fileRef = ACDF4FDC89EFBCDFB0F7802709DA9AD8 /* MDUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22B1ADFCC3503DA0D20308390F5A023E /* Pods-MDUI_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AC2C4ED0C77E6947C2200A08B23FC88 /* Pods-MDUI_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		38A53E0B70796379E014A1098A52110B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		27B78CB767F6583526269597C23223BB /* MDUI-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 40C062BBC2398406E46874CEC16AECE1 /* MDUI-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D1D8DB909CA6DB1CEBF7569EA291C04 /* Pods-MDUI_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AFADC97BE8D98FDE889A02E80A65B9AD /* Pods-MDUI_Tests-dummy.m */; };
-		3F55457294A4564E03CBA7B48E6A88CF /* MDSearchSuggestViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 97B62ED8D3DDB371E40360A9BD68D6B0 /* MDSearchSuggestViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		56F1D9FB0E6E9A77B34A3975841FA86A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		5F927C5E28AA16BAF16843C416230D83 /* MDSearchConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 63156F151DDC9D658BB11D38FA1E1BB5 /* MDSearchConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6320338399EED0D8C6A27C673FA0FB89 /* MDSearchViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = EDECD2131F0FBD19ECC0C223B396476D /* MDSearchViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		66235AB5841E2DA4DA4CF4CC4ACE578A /* MDUI.h in Headers */ = {isa = PBXBuildFile; fileRef = C06DC50784C83D4536621F20606EED88 /* MDUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7349AED8E2F7D2BEE2BEF862753FD558 /* MDSearchSuggestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56FE28F2C611021CC8AB410DEAE7CB75 /* MDSearchSuggestViewController.m */; };
+		5B4E0A86AFB2336E437D324F3F2A47EA /* MDUI-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 490045F639CADB165EB707D2DF36D977 /* MDUI-dummy.m */; };
+		656164FBD7F13493814E08380C3CE996 /* TestFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C20991AB5A6CBA748D9566F43FD22C /* TestFile.m */; };
+		6A972197BE4C569C4E8B353D65F1404B /* md_clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 260E961F0FFBADAE3CF389E2545357FD /* md_clear.png */; };
+		7634999481FE1ABCFAFE81CFE33AAA2D /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = B3C3CFB529E4BC01B451F9713E61E583 /* Test.m */; };
 		79D966B9D955376391DEFE228CE7AC3D /* Pods-MDUI_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF69A5DE54BF126785DF0C8645304FD /* Pods-MDUI_Example-dummy.m */; };
-		8532DEB1ECF0A0A119C98443899072DA /* Test.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FB9D49916699D30C69D5D6F64088EF5 /* Test.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A92F9EB56064AC42E2CE7084A94F7D4 /* MDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 977516A2B77E87C362FCB9686AF0EB03 /* MDSearchViewController.m */; };
-		8BA4979FDD954769886A02423CA09B70 /* MDUI-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 21183AAD1CD235053E832115C2089227 /* MDUI-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9E5EA59357AE045D292C7EB32A57FC87 /* MDSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C17D0A6901013CD5C91DB58BD43C801 /* MDSearchResultViewController.m */; };
-		A736213EE9E2C5510921501A272B6F23 /* MDSearchResultViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D2F8DD7465BF9BA5DA7A0B98124095E8 /* MDSearchResultViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AE40D245B4A29F21107136EB51C947C9 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712C2EE5DBECDF0653CBA0CF0A8B3EE /* Test.m */; };
+		80715D6721CB8D5558AA47E6B53A05D8 /* MDSearchMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A5680AA7748541671F868AA26997D1 /* MDSearchMainViewController.m */; };
+		862FED7115B3D13B0951C33C0BC14BD8 /* MDSearchViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 133D83A25C297A676506B56A6E05743C /* MDSearchViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		98267720C558AAEA3620334A0A3DF656 /* MDSearchResultViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D60D3E1C58B0DB47A4B4B2E991961220 /* MDSearchResultViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9A52BE8EA1C0C6F57C3A0D0209A271BA /* MDSearchResultBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DBB45C6D745E8E45495355B37B484 /* MDSearchResultBaseModel.m */; };
+		A1DAFDFA59C185F2168D9F3DCA31A438 /* MDSearchMainViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 914E8D1D5F7123F655F50459603CEDAF /* MDSearchMainViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A6DD9BD33DB25BC8B558EAC60E9CD462 /* MDSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638F3A2554847E06C3E4E780B57D6B89 /* MDSearchResultViewController.m */; };
+		AF0EA260F96733D122A488C93024A1BF /* MDSearchConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 3557329F38B003899F1694426CFACF98 /* MDSearchConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AF9767A82A7A47D2558003A7B7B50D8C /* Test.h in Headers */ = {isa = PBXBuildFile; fileRef = 25168EFA025F86BBD4B038C162328374 /* Test.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B5A3612522AC84AD03401B2FC97FF0DE /* MDSearchResultBaseModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EE45101E42CEC8852D7E9184DCB815 /* MDSearchResultBaseModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BBDA9A450E1188A4AA5A53AF1AC6CBB4 /* MDSearchSuggestViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA1CAE9A12B40139C53CACE80901712 /* MDSearchSuggestViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BC8B57105DA822237025329636DCF450 /* Pods-MDUI_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A9C6A046744883DF6DBEE52213B91EE7 /* Pods-MDUI_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C00AF1B405E7813F89C6C48C3AC4A51A /* MDUI-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 80199C8E5917BDC5BD98D23DF421BFF9 /* MDUI-dummy.m */; };
-		C6C566EB7D61630DB9595E7BEFF957D0 /* MDSearchMainViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B44317EE54769872B1975BB5B70D14A6 /* MDSearchMainViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB22C1D506B9B95AFD28FCBB02B288D9 /* MDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7066B20FD52ABC4C4769E7377847918 /* MDSearchViewController.m */; };
+		CFA8E3ECF887B35DDFDEC2604E7AAB60 /* TestFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 818194104C7AAD769772666F26C979EA /* TestFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7B7B692CD20972924100956EEBD250F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		DD264B41B332BE48C38965A36DE5A109 /* md_clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 71D56985CDDC334F7CDC82EB133B6E50 /* md_clear.png */; };
-		DFA3D9ABC45AD2C3B82CF17000011D9A /* TestFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 43455263AC91AD2C13ACBCF05F1C49E3 /* TestFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F798C45270FB4649E19CC990BFE5FD34 /* MDSearchMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95700F5C90980546753DE6F409917A5 /* MDSearchMainViewController.m */; };
-		FEE9D42DC7FEDE0E9C21894A54848E1C /* TestFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FB2B05CD409E404DB8EAEA7D2ACBE3 /* TestFile.m */; };
+		EC98392A2D66E0F6A0A4DEF1A15BEFF3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		FBD400478304F7E3E05A2659CCF728C2 /* MDSearchSuggestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B2E0A3E11D8158B6363FCC23FCAEA8 /* MDSearchSuggestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,68 +53,70 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0647A4E2C8B719C625DAEC28B33C4657 /* MDUI-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MDUI-Info.plist"; sourceTree = "<group>"; };
+		133D83A25C297A676506B56A6E05743C /* MDSearchViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDSearchViewController.h; path = MDUI/MDSearch/MDSearchViewController.h; sourceTree = "<group>"; };
 		1607D59F1E07C4F64AA6B90A850D7E67 /* Pods-MDUI_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-MDUI_Example.modulemap"; sourceTree = "<group>"; };
+		184DBB45C6D745E8E45495355B37B484 /* MDSearchResultBaseModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MDSearchResultBaseModel.m; path = MDUI/MDSearch/MDSearchResultBaseModel.m; sourceTree = "<group>"; };
 		1AC2C4ED0C77E6947C2200A08B23FC88 /* Pods-MDUI_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MDUI_Tests-umbrella.h"; sourceTree = "<group>"; };
-		21183AAD1CD235053E832115C2089227 /* MDUI-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MDUI-umbrella.h"; sourceTree = "<group>"; };
+		20852BDD37588BBEFFCD5AF52AA8F1C6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		25168EFA025F86BBD4B038C162328374 /* Test.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Test.h; path = MDUI/Test/Test.h; sourceTree = "<group>"; };
 		257DF8D5C5DFFD4944777B0F193A6F12 /* Pods-MDUI_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MDUI_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		260E961F0FFBADAE3CF389E2545357FD /* md_clear.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = md_clear.png; path = MDUI/MDSearch/resources/md_clear.png; sourceTree = "<group>"; };
+		2CA1CAE9A12B40139C53CACE80901712 /* MDSearchSuggestViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDSearchSuggestViewController.h; path = MDUI/MDSearch/MDSearchSuggestViewController.h; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		32CBCA74C05CA68D745B45A203767526 /* MDUI.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MDUI.xcconfig; sourceTree = "<group>"; };
 		333D4A1287A56F755D2F3C29043BF82C /* Pods-MDUI_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MDUI_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3557329F38B003899F1694426CFACF98 /* MDSearchConst.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDSearchConst.h; path = MDUI/MDSearch/MDSearchConst.h; sourceTree = "<group>"; };
 		36220C442014BC8402D62E937CFAFBBE /* Pods-MDUI_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MDUI_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		36C792AAF1217AB4EDF5652CE4B59EB5 /* MDUI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MDUI.modulemap; sourceTree = "<group>"; };
-		3E6679741E6A84E2F41FA4C92D5BEFCE /* Pods_MDUI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MDUI_Example.framework; path = "Pods-MDUI_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E6679741E6A84E2F41FA4C92D5BEFCE /* Pods_MDUI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDUI_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40C062BBC2398406E46874CEC16AECE1 /* MDUI-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MDUI-umbrella.h"; sourceTree = "<group>"; };
 		412FE4C2A9D12FA29859C70B56D088B6 /* Pods-MDUI_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MDUI_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		43455263AC91AD2C13ACBCF05F1C49E3 /* TestFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TestFile.h; path = MDUI/Test/TestFile.h; sourceTree = "<group>"; };
 		46C89C9930EEBB2111C81E69ADC80FA0 /* Pods-MDUI_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MDUI_Example-Info.plist"; sourceTree = "<group>"; };
-		4C91B1DBE1D17A30357328AB5E7FD131 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		4FB9D49916699D30C69D5D6F64088EF5 /* Test.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Test.h; path = MDUI/Test/Test.h; sourceTree = "<group>"; };
+		490045F639CADB165EB707D2DF36D977 /* MDUI-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MDUI-dummy.m"; sourceTree = "<group>"; };
 		52929AF8F020EA9F6A6FE2D5215EDD1C /* Pods-MDUI_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MDUI_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		56FE28F2C611021CC8AB410DEAE7CB75 /* MDSearchSuggestViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MDSearchSuggestViewController.m; path = MDUI/MDSearch/MDSearchSuggestViewController.m; sourceTree = "<group>"; };
-		5C17D0A6901013CD5C91DB58BD43C801 /* MDSearchResultViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MDSearchResultViewController.m; path = MDUI/MDSearch/MDSearchResultViewController.m; sourceTree = "<group>"; };
-		60FB2B05CD409E404DB8EAEA7D2ACBE3 /* TestFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TestFile.m; path = MDUI/Test/TestFile.m; sourceTree = "<group>"; };
-		63156F151DDC9D658BB11D38FA1E1BB5 /* MDSearchConst.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDSearchConst.h; path = MDUI/MDSearch/MDSearchConst.h; sourceTree = "<group>"; };
-		71D56985CDDC334F7CDC82EB133B6E50 /* md_clear.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = md_clear.png; path = MDUI/MDSearch/resources/md_clear.png; sourceTree = "<group>"; };
-		74659351079CC15FD509A4913BD8BE0F /* MDUI-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MDUI-Info.plist"; sourceTree = "<group>"; };
+		61EE45101E42CEC8852D7E9184DCB815 /* MDSearchResultBaseModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDSearchResultBaseModel.h; path = MDUI/MDSearch/MDSearchResultBaseModel.h; sourceTree = "<group>"; };
+		638F3A2554847E06C3E4E780B57D6B89 /* MDSearchResultViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MDSearchResultViewController.m; path = MDUI/MDSearch/MDSearchResultViewController.m; sourceTree = "<group>"; };
+		72A5680AA7748541671F868AA26997D1 /* MDSearchMainViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MDSearchMainViewController.m; path = MDUI/MDSearch/MDSearchMainViewController.m; sourceTree = "<group>"; };
+		73761A36F3AD06F6064E37CF6DAF2611 /* MDUI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = MDUI.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		76C20991AB5A6CBA748D9566F43FD22C /* TestFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TestFile.m; path = MDUI/Test/TestFile.m; sourceTree = "<group>"; };
 		7FF24CFB64C4554ADE3011E8CD099D5F /* Pods-MDUI_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MDUI_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		80199C8E5917BDC5BD98D23DF421BFF9 /* MDUI-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MDUI-dummy.m"; sourceTree = "<group>"; };
+		818194104C7AAD769772666F26C979EA /* TestFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TestFile.h; path = MDUI/Test/TestFile.h; sourceTree = "<group>"; };
+		914E8D1D5F7123F655F50459603CEDAF /* MDSearchMainViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDSearchMainViewController.h; path = MDUI/MDSearch/MDSearchMainViewController.h; sourceTree = "<group>"; };
 		9630D7D50C954C0607262E425616805C /* Pods-MDUI_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MDUI_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		9712C2EE5DBECDF0653CBA0CF0A8B3EE /* Test.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Test.m; path = MDUI/Test/Test.m; sourceTree = "<group>"; };
-		977516A2B77E87C362FCB9686AF0EB03 /* MDSearchViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MDSearchViewController.m; path = MDUI/MDSearch/MDSearchViewController.m; sourceTree = "<group>"; };
-		97B62ED8D3DDB371E40360A9BD68D6B0 /* MDSearchSuggestViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDSearchSuggestViewController.h; path = MDUI/MDSearch/MDSearchSuggestViewController.h; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A0FB245EE601CCE59AF3E9AAE3A9E660 /* Pods-MDUI_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MDUI_Example.release.xcconfig"; sourceTree = "<group>"; };
 		A8464CE75BED7F1A45603AAF25242EC9 /* Pods-MDUI_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MDUI_Example-frameworks.sh"; sourceTree = "<group>"; };
 		A8869C6DE23555BF1596361E3398B084 /* Pods-MDUI_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MDUI_Tests-Info.plist"; sourceTree = "<group>"; };
 		A9C6A046744883DF6DBEE52213B91EE7 /* Pods-MDUI_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MDUI_Example-umbrella.h"; sourceTree = "<group>"; };
 		AAF69A5DE54BF126785DF0C8645304FD /* Pods-MDUI_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MDUI_Example-dummy.m"; sourceTree = "<group>"; };
+		ACDF4FDC89EFBCDFB0F7802709DA9AD8 /* MDUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDUI.h; path = MDUI/MDUI.h; sourceTree = "<group>"; };
 		AFADC97BE8D98FDE889A02E80A65B9AD /* Pods-MDUI_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MDUI_Tests-dummy.m"; sourceTree = "<group>"; };
-		B44317EE54769872B1975BB5B70D14A6 /* MDSearchMainViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDSearchMainViewController.h; path = MDUI/MDSearch/MDSearchMainViewController.h; sourceTree = "<group>"; };
-		B4EA1823E0CFEF6BECB02406A3F78EA1 /* MDUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MDUI.framework; path = MDUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BCBA718726DCF2D3D758CC7E7AE6CB52 /* MDUI-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MDUI-prefix.pch"; sourceTree = "<group>"; };
-		C0244711A8D663DD4EADD71A040D4421 /* Pods_MDUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MDUI_Tests.framework; path = "Pods-MDUI_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C06DC50784C83D4536621F20606EED88 /* MDUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDUI.h; path = MDUI/MDUI.h; sourceTree = "<group>"; };
+		B3C3CFB529E4BC01B451F9713E61E583 /* Test.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Test.m; path = MDUI/Test/Test.m; sourceTree = "<group>"; };
+		B4EA1823E0CFEF6BECB02406A3F78EA1 /* MDUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MDUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0244711A8D663DD4EADD71A040D4421 /* Pods_MDUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDUI_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C129A2E21253809C747802B740CC16FB /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		C77F8484950ABA74238C0CFE7E3F9585 /* MDUI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MDUI.modulemap; sourceTree = "<group>"; };
 		CFA9554D33C89AEE4C1353E9FAE04662 /* Pods-MDUI_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-MDUI_Tests.modulemap"; sourceTree = "<group>"; };
-		D20DDC3A28EA6F840E8A718B5A8DCC38 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		D2F8DD7465BF9BA5DA7A0B98124095E8 /* MDSearchResultViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDSearchResultViewController.h; path = MDUI/MDSearch/MDSearchResultViewController.h; sourceTree = "<group>"; };
-		D95700F5C90980546753DE6F409917A5 /* MDSearchMainViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MDSearchMainViewController.m; path = MDUI/MDSearch/MDSearchMainViewController.m; sourceTree = "<group>"; };
-		E65E232A14384FC39B25CC155A19D892 /* MDUI.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MDUI.xcconfig; sourceTree = "<group>"; };
-		E6724AFF08E1C8F3006021EC4174C4B2 /* MDUI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = MDUI.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		EDECD2131F0FBD19ECC0C223B396476D /* MDSearchViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDSearchViewController.h; path = MDUI/MDSearch/MDSearchViewController.h; sourceTree = "<group>"; };
+		D4B2E0A3E11D8158B6363FCC23FCAEA8 /* MDSearchSuggestViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MDSearchSuggestViewController.m; path = MDUI/MDSearch/MDSearchSuggestViewController.m; sourceTree = "<group>"; };
+		D60D3E1C58B0DB47A4B4B2E991961220 /* MDSearchResultViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MDSearchResultViewController.h; path = MDUI/MDSearch/MDSearchResultViewController.h; sourceTree = "<group>"; };
+		E7066B20FD52ABC4C4769E7377847918 /* MDSearchViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MDSearchViewController.m; path = MDUI/MDSearch/MDSearchViewController.m; sourceTree = "<group>"; };
+		EBD0C9569E04CD6E16CB3574F2838836 /* MDUI-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MDUI-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1AB73E3C94ED749D2C417CB545ACCF56 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				38A53E0B70796379E014A1098A52110B /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		207D5C144C813FA47C910BBCB9245B45 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D7B7B692CD20972924100956EEBD250F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A8DD797B567D30DEF87C987496914FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC98392A2D66E0F6A0A4DEF1A15BEFF3 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,33 +134,61 @@
 		0FF97C92FAAA00F82F6EE8EDD076CD42 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C6530390AD3B3071FEEFC2EB0E9DE81E /* MDUI */,
+				B098732257259E3C8E7FFACD6EF40684 /* MDUI */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		124A29065E6649C4333A9F98518C698F /* Pod */ = {
+		327D72E8DDADFE6E2F6438EBB241AE17 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				D20DDC3A28EA6F840E8A718B5A8DCC38 /* LICENSE */,
-				E6724AFF08E1C8F3006021EC4174C4B2 /* MDUI.podspec */,
-				4C91B1DBE1D17A30357328AB5E7FD131 /* README.md */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		1404E188D311E8CBB1E387CF8FAB921B /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				36C792AAF1217AB4EDF5652CE4B59EB5 /* MDUI.modulemap */,
-				E65E232A14384FC39B25CC155A19D892 /* MDUI.xcconfig */,
-				80199C8E5917BDC5BD98D23DF421BFF9 /* MDUI-dummy.m */,
-				74659351079CC15FD509A4913BD8BE0F /* MDUI-Info.plist */,
-				BCBA718726DCF2D3D758CC7E7AE6CB52 /* MDUI-prefix.pch */,
-				21183AAD1CD235053E832115C2089227 /* MDUI-umbrella.h */,
+				C77F8484950ABA74238C0CFE7E3F9585 /* MDUI.modulemap */,
+				32CBCA74C05CA68D745B45A203767526 /* MDUI.xcconfig */,
+				490045F639CADB165EB707D2DF36D977 /* MDUI-dummy.m */,
+				0647A4E2C8B719C625DAEC28B33C4657 /* MDUI-Info.plist */,
+				EBD0C9569E04CD6E16CB3574F2838836 /* MDUI-prefix.pch */,
+				40C062BBC2398406E46874CEC16AECE1 /* MDUI-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/MDUI";
+			sourceTree = "<group>";
+		};
+		3926B6B99FDF06ECFEEA9EF874573DBF /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				25168EFA025F86BBD4B038C162328374 /* Test.h */,
+				B3C3CFB529E4BC01B451F9713E61E583 /* Test.m */,
+				818194104C7AAD769772666F26C979EA /* TestFile.h */,
+				76C20991AB5A6CBA748D9566F43FD22C /* TestFile.m */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
+		3AC8AD391BD7BDB9D1067F1EEDCFAF28 /* MDSearch */ = {
+			isa = PBXGroup;
+			children = (
+				3557329F38B003899F1694426CFACF98 /* MDSearchConst.h */,
+				914E8D1D5F7123F655F50459603CEDAF /* MDSearchMainViewController.h */,
+				72A5680AA7748541671F868AA26997D1 /* MDSearchMainViewController.m */,
+				D60D3E1C58B0DB47A4B4B2E991961220 /* MDSearchResultViewController.h */,
+				638F3A2554847E06C3E4E780B57D6B89 /* MDSearchResultViewController.m */,
+				2CA1CAE9A12B40139C53CACE80901712 /* MDSearchSuggestViewController.h */,
+				D4B2E0A3E11D8158B6363FCC23FCAEA8 /* MDSearchSuggestViewController.m */,
+				133D83A25C297A676506B56A6E05743C /* MDSearchViewController.h */,
+				E7066B20FD52ABC4C4769E7377847918 /* MDSearchViewController.m */,
+				61EE45101E42CEC8852D7E9184DCB815 /* MDSearchResultBaseModel.h */,
+				184DBB45C6D745E8E45495355B37B484 /* MDSearchResultBaseModel.m */,
+				49809EDC8B1C3DD91E0F27C4F3F2AE63 /* Resources */,
+			);
+			name = MDSearch;
+			sourceTree = "<group>";
+		};
+		49809EDC8B1C3DD91E0F27C4F3F2AE63 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				260E961F0FFBADAE3CF389E2545357FD /* md_clear.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		593EC2A76A0850D3C1E8B19602DCEFAF /* Products */ = {
@@ -169,21 +201,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6D2E3D796DC2A2499A52D1F3FA8EF435 /* MDSearch */ = {
+		6811E915D2D29A01E8E9B78659F7B1C0 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				63156F151DDC9D658BB11D38FA1E1BB5 /* MDSearchConst.h */,
-				B44317EE54769872B1975BB5B70D14A6 /* MDSearchMainViewController.h */,
-				D95700F5C90980546753DE6F409917A5 /* MDSearchMainViewController.m */,
-				D2F8DD7465BF9BA5DA7A0B98124095E8 /* MDSearchResultViewController.h */,
-				5C17D0A6901013CD5C91DB58BD43C801 /* MDSearchResultViewController.m */,
-				97B62ED8D3DDB371E40360A9BD68D6B0 /* MDSearchSuggestViewController.h */,
-				56FE28F2C611021CC8AB410DEAE7CB75 /* MDSearchSuggestViewController.m */,
-				EDECD2131F0FBD19ECC0C223B396476D /* MDSearchViewController.h */,
-				977516A2B77E87C362FCB9686AF0EB03 /* MDSearchViewController.m */,
-				7D2E1333E0B0ACCB4D42EA210F60E30C /* Resources */,
+				C129A2E21253809C747802B740CC16FB /* LICENSE */,
+				73761A36F3AD06F6064E37CF6DAF2611 /* MDUI.podspec */,
+				20852BDD37588BBEFFCD5AF52AA8F1C6 /* README.md */,
 			);
-			name = MDSearch;
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		6D78ED210D3726C07937494E12DDBABA /* Pods-MDUI_Tests */ = {
@@ -200,25 +225,6 @@
 			);
 			name = "Pods-MDUI_Tests";
 			path = "Target Support Files/Pods-MDUI_Tests";
-			sourceTree = "<group>";
-		};
-		7D2E1333E0B0ACCB4D42EA210F60E30C /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				71D56985CDDC334F7CDC82EB133B6E50 /* md_clear.png */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		8334B0F3B1227835E5487DC03676163C /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				4FB9D49916699D30C69D5D6F64088EF5 /* Test.h */,
-				9712C2EE5DBECDF0653CBA0CF0A8B3EE /* Test.m */,
-				43455263AC91AD2C13ACBCF05F1C49E3 /* TestFile.h */,
-				60FB2B05CD409E404DB8EAEA7D2ACBE3 /* TestFile.m */,
-			);
-			name = Test;
 			sourceTree = "<group>";
 		};
 		A8AF8FBE728978EFF063888A32F7A6CA /* Pods-MDUI_Example */ = {
@@ -238,6 +244,19 @@
 			path = "Target Support Files/Pods-MDUI_Example";
 			sourceTree = "<group>";
 		};
+		B098732257259E3C8E7FFACD6EF40684 /* MDUI */ = {
+			isa = PBXGroup;
+			children = (
+				ACDF4FDC89EFBCDFB0F7802709DA9AD8 /* MDUI.h */,
+				3AC8AD391BD7BDB9D1067F1EEDCFAF28 /* MDSearch */,
+				6811E915D2D29A01E8E9B78659F7B1C0 /* Pod */,
+				327D72E8DDADFE6E2F6438EBB241AE17 /* Support Files */,
+				3926B6B99FDF06ECFEEA9EF874573DBF /* Test */,
+			);
+			name = MDUI;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		B0D3ADCEE4EC9177E219E246A483E2D2 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,19 +272,6 @@
 				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
 			);
 			name = iOS;
-			sourceTree = "<group>";
-		};
-		C6530390AD3B3071FEEFC2EB0E9DE81E /* MDUI */ = {
-			isa = PBXGroup;
-			children = (
-				C06DC50784C83D4536621F20606EED88 /* MDUI.h */,
-				6D2E3D796DC2A2499A52D1F3FA8EF435 /* MDSearch */,
-				124A29065E6649C4333A9F98518C698F /* Pod */,
-				1404E188D311E8CBB1E387CF8FAB921B /* Support Files */,
-				8334B0F3B1227835E5487DC03676163C /* Test */,
-			);
-			name = MDUI;
-			path = ../..;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -306,19 +312,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9C823759AD2C5A9B843FE449D3148356 /* Headers */ = {
+		A4FA93436949393FFEEA000A36C490F9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F927C5E28AA16BAF16843C416230D83 /* MDSearchConst.h in Headers */,
-				C6C566EB7D61630DB9595E7BEFF957D0 /* MDSearchMainViewController.h in Headers */,
-				A736213EE9E2C5510921501A272B6F23 /* MDSearchResultViewController.h in Headers */,
-				3F55457294A4564E03CBA7B48E6A88CF /* MDSearchSuggestViewController.h in Headers */,
-				6320338399EED0D8C6A27C673FA0FB89 /* MDSearchViewController.h in Headers */,
-				8BA4979FDD954769886A02423CA09B70 /* MDUI-umbrella.h in Headers */,
-				66235AB5841E2DA4DA4CF4CC4ACE578A /* MDUI.h in Headers */,
-				8532DEB1ECF0A0A119C98443899072DA /* Test.h in Headers */,
-				DFA3D9ABC45AD2C3B82CF17000011D9A /* TestFile.h in Headers */,
+				AF0EA260F96733D122A488C93024A1BF /* MDSearchConst.h in Headers */,
+				A1DAFDFA59C185F2168D9F3DCA31A438 /* MDSearchMainViewController.h in Headers */,
+				B5A3612522AC84AD03401B2FC97FF0DE /* MDSearchResultBaseModel.h in Headers */,
+				98267720C558AAEA3620334A0A3DF656 /* MDSearchResultViewController.h in Headers */,
+				BBDA9A450E1188A4AA5A53AF1AC6CBB4 /* MDSearchSuggestViewController.h in Headers */,
+				862FED7115B3D13B0951C33C0BC14BD8 /* MDSearchViewController.h in Headers */,
+				27B78CB767F6583526269597C23223BB /* MDUI-umbrella.h in Headers */,
+				07446A77306ABD1620352CDEC71CC318 /* MDUI.h in Headers */,
+				AF9767A82A7A47D2558003A7B7B50D8C /* Test.h in Headers */,
+				CFA8E3ECF887B35DDFDEC2604E7AAB60 /* TestFile.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,12 +372,12 @@
 		};
 		B1A975D2AB418015DCFB51BDF995F41B /* MDUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9453BFBCA146E6968F4644FEC8C3147F /* Build configuration list for PBXNativeTarget "MDUI" */;
+			buildConfigurationList = 7632968D11D24F5E4E13CF795DF4DFF2 /* Build configuration list for PBXNativeTarget "MDUI" */;
 			buildPhases = (
-				9C823759AD2C5A9B843FE449D3148356 /* Headers */,
-				A29556BB85A3DA1294CE185FC71335F8 /* Sources */,
-				1AB73E3C94ED749D2C417CB545ACCF56 /* Frameworks */,
-				F33E47A2BEF8CE0A80CBDDAC5F72C52B /* Resources */,
+				A4FA93436949393FFEEA000A36C490F9 /* Headers */,
+				DE1D6909C455A5053CE12F3B04DDE9BD /* Sources */,
+				7A8DD797B567D30DEF87C987496914FB /* Frameworks */,
+				34C29858B70974DA730E3CDAFEDABBD9 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -410,6 +417,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		34C29858B70974DA730E3CDAFEDABBD9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A972197BE4C569C4E8B353D65F1404B /* md_clear.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		793F560073F4149FF8BC27269B46EF13 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -424,14 +439,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F33E47A2BEF8CE0A80CBDDAC5F72C52B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DD264B41B332BE48C38965A36DE5A109 /* md_clear.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -443,25 +450,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A29556BB85A3DA1294CE185FC71335F8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F798C45270FB4649E19CC990BFE5FD34 /* MDSearchMainViewController.m in Sources */,
-				9E5EA59357AE045D292C7EB32A57FC87 /* MDSearchResultViewController.m in Sources */,
-				7349AED8E2F7D2BEE2BEF862753FD558 /* MDSearchSuggestViewController.m in Sources */,
-				8A92F9EB56064AC42E2CE7084A94F7D4 /* MDSearchViewController.m in Sources */,
-				C00AF1B405E7813F89C6C48C3AC4A51A /* MDUI-dummy.m in Sources */,
-				AE40D245B4A29F21107136EB51C947C9 /* Test.m in Sources */,
-				FEE9D42DC7FEDE0E9C21894A54848E1C /* TestFile.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A57BC6D21F3D9B2F08894046672CCA20 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				79D966B9D955376391DEFE228CE7AC3D /* Pods-MDUI_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE1D6909C455A5053CE12F3B04DDE9BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80715D6721CB8D5558AA47E6B53A05D8 /* MDSearchMainViewController.m in Sources */,
+				9A52BE8EA1C0C6F57C3A0D0209A271BA /* MDSearchResultBaseModel.m in Sources */,
+				A6DD9BD33DB25BC8B558EAC60E9CD462 /* MDSearchResultViewController.m in Sources */,
+				FBD400478304F7E3E05A2659CCF728C2 /* MDSearchSuggestViewController.m in Sources */,
+				CB22C1D506B9B95AFD28FCBB02B288D9 /* MDSearchViewController.m in Sources */,
+				5B4E0A86AFB2336E437D324F3F2A47EA /* MDUI-dummy.m in Sources */,
+				7634999481FE1ABCFAFE81CFE33AAA2D /* Test.m in Sources */,
+				656164FBD7F13493814E08380C3CE996 /* TestFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,9 +558,9 @@
 			};
 			name = Release;
 		};
-		2FA6F0323A274378BA77DF2AFAD4FF69 /* Release */ = {
+		4550E60048AF2EBD1D93946F96CF1FC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E65E232A14384FC39B25CC155A19D892 /* MDUI.xcconfig */;
+			baseConfigurationReference = 32CBCA74C05CA68D745B45A203767526 /* MDUI.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -576,11 +584,10 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		4957C6823B4D1ED10F02289B43B8D13D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -668,43 +675,11 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
-		};
-		4C5E974D6D5B8A5DB65389708472B37C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E65E232A14384FC39B25CC155A19D892 /* MDUI.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/MDUI/MDUI-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MDUI/MDUI-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MDUI/MDUI.modulemap";
-				PRODUCT_MODULE_NAME = MDUI;
-				PRODUCT_NAME = MDUI;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		7EF7227D9B20A1D549000096ACCB23D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -804,6 +779,38 @@
 			};
 			name = Release;
 		};
+		F0EE7E66015B4DC479B1749C412DC0B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32CBCA74C05CA68D745B45A203767526 /* MDUI.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/MDUI/MDUI-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MDUI/MDUI-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MDUI/MDUI.modulemap";
+				PRODUCT_MODULE_NAME = MDUI;
+				PRODUCT_NAME = MDUI;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -816,20 +823,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		7632968D11D24F5E4E13CF795DF4DFF2 /* Build configuration list for PBXNativeTarget "MDUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4550E60048AF2EBD1D93946F96CF1FC0 /* Debug */,
+				F0EE7E66015B4DC479B1749C412DC0B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8DCE23FF716059A1018F8D03DABF2F5B /* Build configuration list for PBXNativeTarget "Pods-MDUI_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03A2E87CB7FD050D2EDE9DA75F0C9B83 /* Debug */,
 				15408DED3EFE1579441E1DFE4C281B47 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9453BFBCA146E6968F4644FEC8C3147F /* Build configuration list for PBXNativeTarget "MDUI" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4C5E974D6D5B8A5DB65389708472B37C /* Debug */,
-				2FA6F0323A274378BA77DF2AFAD4FF69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

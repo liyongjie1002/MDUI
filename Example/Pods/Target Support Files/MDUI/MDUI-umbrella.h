@@ -13,6 +13,7 @@
 #import "MDUI.h"
 #import "MDSearchConst.h"
 #import "MDSearchMainViewController.h"
+#import "MDSearchResultBaseModel.h"
 #import "MDSearchResultViewController.h"
 #import "MDSearchSuggestViewController.h"
 #import "MDSearchViewController.h"

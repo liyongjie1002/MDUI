@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MDSearchDemoModel.h"
 
 @interface MDResultTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) NSString  *name;
+ 
+@property (nonatomic, strong) MDSearchDemoModel *model;
 
 @end

@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^MDSearchSuggestionSelectedIndexPathBlock)(NSString *suggestText, NSIndexPath *indexPath);
+typedef void(^MDSearchSuggestionSelectedIndexPathBlock)(NSString *suggestText, NSIndexPath *indexPath, NSInteger    type);
 
 // 这个接口，让外界提供数据源
 @protocol MDSearchSuggestionViewDataSource <NSObject>
 
-- (NSInteger)numberOfSectionsInSearchSuggestionView:(UITableView *)searchSuggestionView;
 - (NSInteger)searchSuggestionView:(UITableView *)searchSuggestionView numberOfRowsInSection:(NSInteger)section;
 - (UITableViewCell *)searchSuggestionView:(UITableView *)searchSuggestionView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+@optional
+- (NSInteger)numberOfSectionsInSearchSuggestionView:(UITableView *)searchSuggestionView;
 - (CGFloat)searchSuggestionView:(UITableView *)searchSuggestionView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

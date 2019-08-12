@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^MDSearchMainSelectedIndexPathBlock)(NSString *mainText, NSIndexPath *indexPath);
+typedef void(^MDSearchMainSelectedIndexPathBlock)(NSString *mainText, NSIndexPath *indexPath, NSInteger type);
 
 @protocol MDSearchMainViewDataSource <NSObject>
 
@@ -16,6 +16,7 @@ typedef void(^MDSearchMainSelectedIndexPathBlock)(NSString *mainText, NSIndexPat
 - (UICollectionViewCell *)searchMainView:(UICollectionView *)searchMainView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 - (UICollectionReusableView *)searchMainView:(UICollectionView *)searchMainView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath;
 - (CGSize)searchMainView:(UICollectionView *)searchMainView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
+@optional
 - (CGSize)searchMainView:(UICollectionView *)searchMainView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
 
 @end
@@ -25,7 +26,10 @@ typedef void(^MDSearchMainSelectedIndexPathBlock)(NSString *mainText, NSIndexPat
 @property (nonatomic, strong) UICollectionView  *collectionView;
 
 @property (nonatomic, copy)   NSArray               *hots;
+
 @property (nonatomic, strong) NSMutableArray        *histories;
+
+@property (nonatomic, strong) NSMutableArray     *datas;
 
 @property (nonatomic, copy)   MDSearchMainSelectedIndexPathBlock  selectedIndexPathBlock;
 
