@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface MDToastStyle : NSObject
 
 @property (strong, nonatomic) UIColor *backgroundColor;
@@ -50,12 +50,32 @@
 
 @property (assign, nonatomic) CGSize imageSize;
 
-@property (assign, nonatomic) NSTimeInterval fadeDuration;
-
 - (instancetype)initWithDefaultStyle NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
 
++(instancetype)defaultcCreateStyle;
+
+- (MDToastStyle* (^)(UIColor *color))setBackgroundColor ;
+- (MDToastStyle* (^)(UIColor *color))setTitleColor ;
+- (MDToastStyle* (^)(UIColor *color))setMessageColor ;
+- (MDToastStyle* (^)(CGFloat cornerRadius))setCornerRadius ;
+- (MDToastStyle* (^)(UIFont *font))setTitleFont ;
+- (MDToastStyle* (^)(UIFont *font))setMessageFont ;
+- (MDToastStyle* (^)(NSTextAlignment alignment))setTitleAlignment ;
+- (MDToastStyle* (^)(NSTextAlignment alignment))setMessageAlignment ;
+- (MDToastStyle* (^)(NSInteger lines))setTitleNumberOfLines;
+- (MDToastStyle* (^)(NSInteger lines))setMessageNumberOfLines;
+- (MDToastStyle* (^)(CGFloat width))setMaxWidthPercentage ;
+- (MDToastStyle* (^)(CGFloat height))setMaxHeightPercentage ;
+- (MDToastStyle* (^)(CGFloat padding))setHorizontalPadding;
+- (MDToastStyle* (^)(CGFloat padding))setVerticalPadding;
+- (MDToastStyle* (^)(BOOL display))setDisplayShadow ;
+- (MDToastStyle* (^)(UIColor *color))setShadowColor ;
+- (MDToastStyle* (^)(CGFloat shadowFloat))setShadowOpacity ;
+- (MDToastStyle* (^)(CGFloat shadowFloat))setShadowRadius;
+- (MDToastStyle* (^)(CGSize shadowOffset))setShadowOffset ;
+- (MDToastStyle* (^)(CGSize imageSize))setImageSize ;
 
 @end
 

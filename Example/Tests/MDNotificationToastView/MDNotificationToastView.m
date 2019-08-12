@@ -1,39 +1,35 @@
 //
-//  MDToastView.m
+//  MDNotificationToastView.m
 //  MDUI_Example
 //
-//  Created by mac on 2019/7/24.
+//  Created by mac on 2019/7/30.
 //  Copyright © 2019 iyongjie@yeah.net. All rights reserved.
 //
 
-#import "MDToastView.h"
-#import <QuartzCore/QuartzCore.h>
-#import <objc/runtime.h>
+#import "MDNotificationToastView.h"
 
 #define kScreenWidth                    [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight                   [UIScreen mainScreen].bounds.size.height
 #define kToastDefaultFont               [UIFont systemFontOfSize:15]
 #define kToastDefaultTextColor          [UIColor blackColor]
+#define kNotificationStatusBarHeight    ([[UIApplication sharedApplication] statusBarFrame].size.height)
 
-@interface MDToastView()
+
+@interface MDNotificationToastView()
 
 @property (strong, nonatomic) NSString          *message;
 @property (strong, nonatomic) UILabel           *messageLabel;
 @property (strong, nonatomic) UILabel           *titleLabel;
 @property (strong, nonatomic) UIImageView       *imageView;
 
-@property (nonatomic, strong) NSTimer                           *dismissTimer;
-@property (nonatomic, assign) BOOL                              isDuringAnimation;
-@property (nonatomic, assign) BOOL                              isCurrentlyOnScreen;
 @end
 
+@implementation MDNotificationToastView
 
-@implementation MDToastView
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.clipsToBounds = YES;
         self.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     }
     return self;
@@ -100,7 +96,7 @@
  * image
  * style
  */
-- (CGSize )md_makeToastForMessage:(NSString *)message title:(NSString *)title image:(UIImage *)image style:(MDToastStyle *)style pattern:(MDToastPattern)pattern isDefaultStyle:(BOOL)isDefault{
+- (CGSize )md_makeToastForMessage:(NSString *)message title:(NSString *)title image:(UIImage *)image style:(MDNotificationToastStyle *)style Position:(MDToastPosition)position pattern:(MDToastPattern)pattern isDefaultStyle:(BOOL)isDefault type:(MDToastType)type{
     
     if (message == nil && title == nil && image == nil) {
         return CGSizeZero;
@@ -111,23 +107,56 @@
     self.messageLabel = nil;
     [self.titleLabel removeFromSuperview];
     self.titleLabel = nil;
-    
     self.effect = [UIBlurEffect effectWithStyle:[self getBlur:pattern]];
-    self.layer.cornerRadius = style.cornerRadius;
     self.contentView.backgroundColor = style.backgroundColor;
-    if (style.displayShadow) {
-        self.layer.shadowColor = style.shadowColor.CGColor;
-        self.layer.shadowOpacity = style.shadowOpacity;
-        self.layer.shadowRadius = style.shadowRadius;
-        self.layer.shadowOffset = style.shadowOffset;
+
+    if (type == MDToastTypeNotificationNavi) {
+       CGSize naviSize = [self make_naviToastWithMessage:message title:title image:image style:style Position:position pattern:pattern isDefaultStyle:style];
+        return naviSize;
+    } else if (type  == MDToastTypeNotificationTip) {
+        
+        [self.contentView addSubview:self.messageLabel];
+        [self.contentView addSubview:self.imageView];
+        /* 如果是默认style，将显示pattern的默认样式 */
+        if (image != nil) {
+            self.imageView.image = image;
+        } else {
+            if (pattern == MDToastPatternNight) {
+                self.imageView.image = [UIImage imageNamed:@"ft_failure"];
+            } else {
+                self.imageView.image = [UIImage imageNamed:@"ft_failure_dark"];
+            }
+        }
+        
+        _messageLabel.frame = CGRectMake(10, 0, kScreenWidth, 30);
+        _messageLabel.font = style.messageFont;
+        _messageLabel.textAlignment = style.messageAlignment;
+        _messageLabel.textColor = style.messageColor;
+        _messageLabel.text = message;
+        
+        if (isDefault) {
+            self.effect = [UIBlurEffect effectWithStyle:[self getBlur:pattern]];
+            self.messageLabel.textColor = [self getTextColorWithStyle:pattern];
+        }
+        self.imageView.frame = CGRectMake(kScreenWidth-30, 5, 20, 20);
+        
+        CGSize tipSize = CGSizeMake(kScreenWidth, 30);
+        return tipSize;
     }
-    CGRect imageRect = CGRectZero;
+    return CGSizeZero;
+}
+
+// 上下导航通知
+- (CGSize)make_naviToastWithMessage:(NSString *)message title:(NSString *)title image:(UIImage *)image style:(MDNotificationToastStyle *)style Position:(MDToastPosition)position pattern:(MDToastPattern)pattern isDefaultStyle:(BOOL)isDefault {
+    
+    CGFloat headerHeight = (position == MDToastPositionNotificationTop) ? kNotificationStatusBarHeight : 0;
+    CGRect imageRect = CGRectMake(0, headerHeight, 0, 0);
     if (image != nil) {
-        self.imageView.frame = CGRectMake(style.horizontalPadding, style.verticalPadding, style.imageSize.width, style.imageSize.height);
+        self.imageView.frame = CGRectMake(style.horizontalPadding, style.verticalPadding + imageRect.origin.y, style.imageSize.width, style.imageSize.height);
         _imageView.image = image;
         
         imageRect.origin.x = style.horizontalPadding;
-        imageRect.origin.y = style.verticalPadding;
+        imageRect.origin.y = style.verticalPadding + imageRect.origin.y;
         imageRect.size.width = _imageView.bounds.size.width;
         imageRect.size.height = _imageView.bounds.size.height;
     }
@@ -156,7 +185,7 @@
         CGSize expectedSizeMessage = [_messageLabel sizeThatFits:maxSizeMessage];
         // UILabel can return a size larger than the max size when the number of lines is 1
         expectedSizeMessage = CGSizeMake(MIN(maxSizeMessage.width, expectedSizeMessage.width), MIN(maxSizeMessage.height, expectedSizeMessage.height));
-        _messageLabel.frame = CGRectMake(0.0, 0.0, expectedSizeMessage.width, expectedSizeMessage.height);
+        _messageLabel.frame = CGRectMake(0.0, _messageLabel.frame.origin.y, expectedSizeMessage.width, expectedSizeMessage.height);
     }
     
     /* 如果是默认style，将显示pattern的默认样式 */
@@ -166,10 +195,10 @@
         _messageLabel.textColor = [self getTextColorWithStyle:pattern];
     }
     
-    CGRect titleRect = CGRectZero;
+    CGRect titleRect = CGRectMake(0, headerHeight, 0, 0);
     if(_titleLabel != nil) {
         titleRect.origin.x = imageRect.origin.x + imageRect.size.width + style.horizontalPadding;
-        titleRect.origin.y = style.verticalPadding;
+        titleRect.origin.y = style.verticalPadding + headerHeight;
         titleRect.size.width = _titleLabel.bounds.size.width;
         titleRect.size.height = _titleLabel.bounds.size.height;
     }
@@ -182,12 +211,9 @@
         messageRect.size.height = _messageLabel.bounds.size.height;
     }
     
-    CGFloat longerWidth = MAX(titleRect.size.width, messageRect.size.width);
-    CGFloat longerX = MAX(titleRect.origin.x, messageRect.origin.x);
-    CGFloat contentViewWidth = MAX((imageRect.size.width + (style.horizontalPadding * 2.0)), (longerX + longerWidth + style.horizontalPadding));
-    CGFloat contentViewHeight = MAX((messageRect.origin.y + messageRect.size.height + style.verticalPadding), (imageRect.size.height + (style.verticalPadding * 2.0)));
+    CGFloat contentViewHeight = MAX((messageRect.origin.y + messageRect.size.height + style.verticalPadding), (imageRect.size.height + (style.verticalPadding * 2.0))) + headerHeight;
     
-    self.frame = CGRectMake(0.0, 0.0, contentViewWidth, contentViewHeight);
+    self.frame = CGRectMake(0.0, 0.0, kScreenWidth, contentViewHeight);
     
     if(_titleLabel != nil) {
         _titleLabel.frame = titleRect;
@@ -203,30 +229,5 @@
     
     return self.frame.size;
 }
-
-- (CGPoint)md_getToastCenterPointPosition:(MDToastPosition)position style:(MDToastStyle *)style{
-    
-    UIEdgeInsets safeInsets = UIEdgeInsetsZero;
-    if (@available(iOS 11.0, *)) {
-        safeInsets = self.safeAreaInsets;
-    }
-    CGFloat topPadding = style.verticalPadding + safeInsets.top;
-    CGFloat bottomPadding = style.verticalPadding + safeInsets.bottom;
-    
-    switch (position) {
-        case MDToastPositionTop:
-            return CGPointMake(kScreenWidth / 2.0, (self.contentView.frame.size.height / 2.0) + topPadding);
-            break;
-        case MDToastPositionCenter:
-            return CGPointMake(kScreenWidth / 2.0, kScreenHeight / 2.0);
-            break;
-        case MDToastPositionBottom:
-            return CGPointMake(kScreenWidth / 2.0, (kScreenHeight - (self.contentView.frame.size.height / 2.0)) - bottomPadding);
-            break;
-        default:
-            break;
-    }
-}
-
 
 @end
