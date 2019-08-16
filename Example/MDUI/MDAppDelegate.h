@@ -7,9 +7,11 @@
 //
 
 @import UIKit;
+#import "MDTabBarController.h"
 
-@interface MDAppDelegate : UIResponder <UIApplicationDelegate>
+@interface MDAppDelegate : UIResponder <UIApplicationDelegate, MDTabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIViewController *viewController;
 
 @end

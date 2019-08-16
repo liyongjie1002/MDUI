@@ -7,13 +7,82 @@
 //
 
 #import "MDAppDelegate.h"
+#import "MDTabOneViewController.h"
+#import "MDTabThreeViewController.h"
+#import "MDTabFiveViewController.h"
 
 @implementation MDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self setupViewControllers];
+    [self.window setRootViewController:self.viewController];
+    [self.window makeKeyAndVisible];
+    
+    [self customizeInterface];
+    
+    
     return YES;
+}
+
+#pragma mark - Methods
+- (void)setupViewControllers {
+    MDTabOneViewController *firstViewController = [[MDTabOneViewController alloc] init];
+    UINavigationController *firstNavigationController = [[UINavigationController alloc]
+                                                   initWithRootViewController:firstViewController];
+    
+    MDTabThreeViewController *thirdViewController = [[MDTabThreeViewController alloc] init];
+    UINavigationController *thirdNavigationController = [[UINavigationController alloc]
+                                                   initWithRootViewController:thirdViewController];
+    
+
+    MDTabFiveViewController *fiveViewController = [[MDTabFiveViewController alloc] init];
+    UINavigationController *fiveNavigationController = [[UINavigationController alloc]
+                                                        initWithRootViewController:fiveViewController];
+    
+    MDTabBarController *tabBarController = [[MDTabBarController alloc] init];
+    tabBarController.delegate = self;
+    [tabBarController setViewControllers:@[firstNavigationController,
+                                           thirdNavigationController, fiveNavigationController]];
+
+    self.viewController = tabBarController;
+    [self drawTabBarForController:tabBarController];
+}
+
+- (void)drawTabBarForController:(MDTabBarController *)tabBarController {
+
+    NSArray *tabBarItemImages = @[@"first", @"second", @"first"];
+    NSInteger index = 0;
+    for (MDTabBarItem *item in tabBarController.tabBar.items) {
+        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",
+                                                      [tabBarItemImages objectAtIndex:index]]];
+        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",
+                                                        [tabBarItemImages objectAtIndex:index]]];
+        [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
+        index++;
+    }
+}
+
+- (void)tabBarControllerSelectedRiseButton {
+    
+    UIAlertView *aller = [[UIAlertView alloc]initWithTitle:@"aaa" message:@"vvv" delegate:self cancelButtonTitle:nil otherButtonTitles:@"取消", nil];
+    [aller show];
+}
+
+- (void)customizeInterface {
+    
+    UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
+    UIImage *backgroundImage = nil;
+    NSDictionary *textAttributes = nil;
+    
+    backgroundImage = [UIImage imageNamed:@"navigationbar_background_tall"];
+    textAttributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18],
+                       NSForegroundColorAttributeName: [UIColor blackColor],
+                       };
+    [navigationBarAppearance setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+    [navigationBarAppearance setTitleTextAttributes:textAttributes];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
