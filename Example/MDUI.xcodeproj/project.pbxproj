@@ -55,6 +55,7 @@
 		B782CC8622F0297F00D5178D /* MDSearchDemoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B782CC8522F0297F00D5178D /* MDSearchDemoModel.m */; };
 		B782CC8822F02FEA00D5178D /* demo.json in Resources */ = {isa = PBXBuildFile; fileRef = B782CC8722F02FEA00D5178D /* demo.json */; };
 		B782CC8E22F0397100D5178D /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = B782CC8D22F0397100D5178D /* face.png */; };
+		B7CDC95A23266051006CBF2E /* MDNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7CDC95923266051006CBF2E /* MDNavigationController.m */; };
 		B7EA08B422EE8C1F002C8E46 /* MDHuyaCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EA08B322EE8C1F002C8E46 /* MDHuyaCollectionReusableView.m */; };
 		B7EA08BC22EF2F62002C8E46 /* MDResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EA08BB22EF2F62002C8E46 /* MDResultTableViewCell.m */; };
 /* End PBXBuildFile section */
@@ -150,6 +151,8 @@
 		B782CC8522F0297F00D5178D /* MDSearchDemoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDSearchDemoModel.m; sourceTree = "<group>"; };
 		B782CC8722F02FEA00D5178D /* demo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = demo.json; sourceTree = "<group>"; };
 		B782CC8D22F0397100D5178D /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
+		B7CDC95823266051006CBF2E /* MDNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDNavigationController.h; sourceTree = "<group>"; };
+		B7CDC95923266051006CBF2E /* MDNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDNavigationController.m; sourceTree = "<group>"; };
 		B7EA08B222EE8C1F002C8E46 /* MDHuyaCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDHuyaCollectionReusableView.h; sourceTree = "<group>"; };
 		B7EA08B322EE8C1F002C8E46 /* MDHuyaCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDHuyaCollectionReusableView.m; sourceTree = "<group>"; };
 		B7EA08BA22EF2F62002C8E46 /* MDResultTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDResultTableViewCell.h; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 		0428A7352302632D00D08083 /* TabBarControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B7CDC95823266051006CBF2E /* MDNavigationController.h */,
+				B7CDC95923266051006CBF2E /* MDNavigationController.m */,
 				0428A7362302639700D08083 /* MDTabOneViewController.h */,
 				0428A7372302639700D08083 /* MDTabOneViewController.m */,
 				0428A739230263A000D08083 /* MDTabTwoViewController.h */,
@@ -609,6 +614,7 @@
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				0428A73E230263AA00D08083 /* MDTabThreeViewController.m in Sources */,
 				B75569FD22EC4ED8003CDA54 /* MDHuYaCollectionViewCell.m in Sources */,
+				B7CDC95A23266051006CBF2E /* MDNavigationController.m in Sources */,
 				B7500A2422F40A0C00CC8D31 /* MDPushTransition.m in Sources */,
 				B73EC94F22E95FFC009871FF /* MDSearchDemoViewController.m in Sources */,
 				0428A71823014BB800D08083 /* MDToast.m in Sources */,

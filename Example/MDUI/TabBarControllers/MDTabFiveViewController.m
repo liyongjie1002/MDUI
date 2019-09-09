@@ -13,6 +13,8 @@
 #import "MDTabFourViewController.h"
 #import "MDTabBarController.h"
 
+#import "MDViewController.h"
+
 @interface MDTabFiveViewController ()<MDTabBarControllerDelegate>
 
 @end
@@ -34,6 +36,18 @@
     self.view.backgroundColor = [UIColor purpleColor];
     [self.md_tabBarItem setBadgeValue:@"171"];
 
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"点击了" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(100, 100, 100, 30)];
+    [btn addTarget:self action:@selector(clickAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    
+}
+
+-(void)clickAction {
+    MDViewController *mdVC = [MDViewController new];
+    [self.navigationController pushViewController:mdVC animated:YES];
 }
 
 

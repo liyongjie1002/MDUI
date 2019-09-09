@@ -13,6 +13,7 @@
 #import "MDTabThreeViewController.h"
 #import "MDTabFourViewController.h"
 #import "MDTabBarController.h"
+#import "MDNavigationController.h"
 
 @implementation MDAppDelegate
 
@@ -52,23 +53,23 @@
 
     
     MDTabOneViewController *firstViewController = [[MDTabOneViewController alloc] init];
-    UINavigationController *firstNavigationController = [[UINavigationController alloc]
+    MDNavigationController *firstNavigationController = [[MDNavigationController alloc]
                                                          initWithRootViewController:firstViewController];
     
     MDTabTwoViewController *secondViewController = [[MDTabTwoViewController alloc] init];
-    UINavigationController *secondNavigationController = [[UINavigationController alloc]
+    MDNavigationController *secondNavigationController = [[MDNavigationController alloc]
                                                           initWithRootViewController:secondViewController];
     
     MDTabThreeViewController *thirdViewController = [[MDTabThreeViewController alloc] init];
-    UINavigationController *thirdNavigationController = [[UINavigationController alloc]
+    MDNavigationController *thirdNavigationController = [[MDNavigationController alloc]
                                                          initWithRootViewController:thirdViewController];
     
     MDTabFourViewController *fourViewController = [[MDTabFourViewController alloc] init];
-    UINavigationController *fourNavigationController = [[UINavigationController alloc]
+    MDNavigationController *fourNavigationController = [[MDNavigationController alloc]
                                                         initWithRootViewController:fourViewController];
     
     MDTabFiveViewController *fiveViewController = [[MDTabFiveViewController alloc] init];
-    UINavigationController *fiveNavigationController = [[UINavigationController alloc]
+    MDNavigationController *fiveNavigationController = [[MDNavigationController alloc]
                                                         initWithRootViewController:fiveViewController];
     
     
