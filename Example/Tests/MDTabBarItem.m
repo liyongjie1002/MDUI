@@ -43,7 +43,7 @@
     _titlePositionAdjustment = UIOffsetZero;
     _badgeBackgroundColor = [UIColor redColor];
     _badgeTextColor = [UIColor whiteColor];
-    _badgeTextFont = [UIFont systemFontOfSize:12];
+    _badgeTextFont = [UIFont systemFontOfSize:10];
     _badgePositionAdjustment = UIOffsetZero;
     _unselectedTitleAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:12],
                                    NSForegroundColorAttributeName: [UIColor grayColor],};
@@ -104,7 +104,7 @@
     NSString *badge = nil;
     if (_isDefaultBadge) {
         
-        CGRect badgeBackgroundFrame = CGRectMake(self.frame.size.width / 2.0 + (self.itemImage.frame.size.width / 2.0) * 0.8 + [self badgePositionAdjustment].horizontal, 6.0 +  [self badgePositionAdjustment].vertical, 10, 10);
+        CGRect badgeBackgroundFrame = CGRectMake(self.frame.size.width / 2.0 + (self.itemImage.frame.size.width / 2.0) * 0.7 + [self badgePositionAdjustment].horizontal, 8.0 +  [self badgePositionAdjustment].vertical, 8, 8);
 
         self.badgeLabel.backgroundColor = [self badgeBackgroundColor];
         self.badgeLabel.font = [self badgeTextFont];
@@ -120,14 +120,18 @@
                 badge = _badgeValue;
             }
             CGSize badgeSize = CGSizeZero;
-            badgeSize = [badge boundingRectWithSize:CGSizeMake(self.frame.size.width, 20)
+            CGRect badgeBackgroundFrame = CGRectZero;
+            badgeSize = [badge boundingRectWithSize:CGSizeMake(self.frame.size.width, 18)
                                             options:NSStringDrawingUsesLineFragmentOrigin
                                          attributes:@{NSFontAttributeName: [self badgeTextFont]}
                                             context:nil].size;
             if (badgeSize.width < badgeSize.height) {
                 badgeSize = CGSizeMake(badgeSize.height, badgeSize.height);
+                badgeBackgroundFrame = CGRectMake(self.frame.size.width / 2.0 + (self.itemImage.frame.size.width / 2.0) * 0.6 + [self badgePositionAdjustment].horizontal, 3.0 +  [self badgePositionAdjustment].vertical, badgeSize.width + 2 * 2, badgeSize.height + 2 * 2);
+            } else {
+                
+                badgeBackgroundFrame = CGRectMake(self.frame.size.width / 2.0 + (self.itemImage.frame.size.width / 2.0) * 0.6 + [self badgePositionAdjustment].horizontal, 3.0 +  [self badgePositionAdjustment].vertical, badgeSize.width + 3 * 2, badgeSize.height + 2 * 2);
             }
-            CGRect badgeBackgroundFrame = CGRectMake(self.frame.size.width / 2.0 + (self.itemImage.frame.size.width / 2.0) * 0.9 + [self badgePositionAdjustment].horizontal, 2.0 +  [self badgePositionAdjustment].vertical, badgeSize.width + 2 * 2, badgeSize.height + 2 * 2);
             
             self.badgeLabel.text = badge;
             self.badgeLabel.backgroundColor = [self badgeBackgroundColor];

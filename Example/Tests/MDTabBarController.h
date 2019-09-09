@@ -36,12 +36,13 @@
 
 - (void)setTabBarHidden:(BOOL)hidden animated:(BOOL)animated;
 
+@property (nonatomic, copy) NSArray                                     *tabbarItems;
 @end
 
 
 @interface UIViewController (MDTabBarControllerItem)
 
-@property(nonatomic, setter = md_setTabBarItem:) MDTabBarItem           *md_tabBarItem;
+@property(nonatomic, strong) MDTabBarItem                               *md_tabBarItem;
 @property(nonatomic, readonly) MDTabBarController                       *md_tabBarController;
 
 @end

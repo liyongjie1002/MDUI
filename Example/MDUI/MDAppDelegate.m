@@ -7,9 +7,12 @@
 //
 
 #import "MDAppDelegate.h"
-#import "MDTabOneViewController.h"
-#import "MDTabThreeViewController.h"
 #import "MDTabFiveViewController.h"
+#import "MDTabOneViewController.h"
+#import "MDTabTwoViewController.h"
+#import "MDTabThreeViewController.h"
+#import "MDTabFourViewController.h"
+#import "MDTabBarController.h"
 
 @implementation MDAppDelegate
 
@@ -29,41 +32,103 @@
 
 #pragma mark - Methods
 - (void)setupViewControllers {
+//    MDTabOneViewController *firstViewController = [[MDTabOneViewController alloc] init];
+//    UINavigationController *firstNavigationController = [[UINavigationController alloc]
+//                                                   initWithRootViewController:firstViewController];
+//
+//    MDTabThreeViewController *thirdViewController = [[MDTabThreeViewController alloc] init];
+//    UINavigationController *thirdNavigationController = [[UINavigationController alloc]
+//                                                   initWithRootViewController:thirdViewController];
+//
+//
+//    MDTabFiveViewController *fiveViewController = [[MDTabFiveViewController alloc] init];
+//    UINavigationController *fiveNavigationController = [[UINavigationController alloc]
+//                                                        initWithRootViewController:fiveViewController];
+//
+//    MDTabBarController *tabBarController = [[MDTabBarController alloc] init];
+//    tabBarController.delegate = self;
+//    [tabBarController setViewControllers:@[firstNavigationController,
+//                                           thirdNavigationController, fiveNavigationController]];
+
+    
     MDTabOneViewController *firstViewController = [[MDTabOneViewController alloc] init];
     UINavigationController *firstNavigationController = [[UINavigationController alloc]
-                                                   initWithRootViewController:firstViewController];
+                                                         initWithRootViewController:firstViewController];
+    
+    MDTabTwoViewController *secondViewController = [[MDTabTwoViewController alloc] init];
+    UINavigationController *secondNavigationController = [[UINavigationController alloc]
+                                                          initWithRootViewController:secondViewController];
     
     MDTabThreeViewController *thirdViewController = [[MDTabThreeViewController alloc] init];
     UINavigationController *thirdNavigationController = [[UINavigationController alloc]
-                                                   initWithRootViewController:thirdViewController];
+                                                         initWithRootViewController:thirdViewController];
     
-
+    MDTabFourViewController *fourViewController = [[MDTabFourViewController alloc] init];
+    UINavigationController *fourNavigationController = [[UINavigationController alloc]
+                                                        initWithRootViewController:fourViewController];
+    
     MDTabFiveViewController *fiveViewController = [[MDTabFiveViewController alloc] init];
     UINavigationController *fiveNavigationController = [[UINavigationController alloc]
                                                         initWithRootViewController:fiveViewController];
     
+    
     MDTabBarController *tabBarController = [[MDTabBarController alloc] init];
     tabBarController.delegate = self;
-    [tabBarController setViewControllers:@[firstNavigationController,
-                                           thirdNavigationController, fiveNavigationController]];
-
+    [tabBarController setViewControllers:@[firstNavigationController, secondNavigationController,
+                                         fourNavigationController, fiveNavigationController]];
+    
     self.viewController = tabBarController;
-    [self drawTabBarForController:tabBarController];
+    [self customizeTabBarForController:tabBarController];
 }
 
-- (void)drawTabBarForController:(MDTabBarController *)tabBarController {
-
-    NSArray *tabBarItemImages = @[@"first", @"second", @"first"];
-    NSInteger index = 0;
-    for (MDTabBarItem *item in tabBarController.tabBar.items) {
+- (void)customizeTabBarForController:(MDTabBarController *)tabBarController {
+    
+    NSArray *tabBarItemImages = @[@"first", @"second", @"post", @"second", @"first"];
+    NSMutableArray *tabbarItems = [NSMutableArray array];
+    for (NSInteger i = 0; i < tabBarItemImages.count; i++) {
         UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",
-                                                      [tabBarItemImages objectAtIndex:index]]];
+                                                      [tabBarItemImages objectAtIndex:i]]];
         UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",
-                                                        [tabBarItemImages objectAtIndex:index]]];
+                                                        [tabBarItemImages objectAtIndex:i]]];
+        MDTabBarItem *item = [[MDTabBarItem alloc]init];
+        item.title = tabBarItemImages[i];
         [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
-        index++;
+        if (i == 2) {
+            item.tabBarItemType = MDTabBarItemRise;
+        } else {
+            item.tabBarItemType = MDTabBarItemNormal;
+        }
+        [tabbarItems addObject:item];
     }
+    [tabBarController setTabbarItems:tabbarItems];
 }
+
+//- (void)drawTabBarForController:(MDTabBarController *)tabBarController {
+//
+//    NSArray *tabBarItemImages = @[@"first", @"second", @"first"];
+////    NSInteger index = 0;
+////    for (MDTabBarItem *item in tabBarController.tabBar.items) {
+////        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",
+////                                                      [tabBarItemImages objectAtIndex:index]]];
+////        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",
+////                                                        [tabBarItemImages objectAtIndex:index]]];
+////        [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
+////        index++;
+////    }
+//
+//    NSMutableArray *tabbarItems = [NSMutableArray array];
+//    for (NSInteger i = 0; i < tabBarItemImages.count; i++) {
+//        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",
+//                                                      [tabBarItemImages objectAtIndex:i]]];
+//        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",
+//                                                        [tabBarItemImages objectAtIndex:i]]];
+//        MDTabBarItem *item = [[MDTabBarItem alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/5, 50)];
+//        [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
+//        [tabbarItems addObject:item];
+//    }
+//    [tabBarController setTabbarItems:tabbarItems];
+//
+//}
 
 - (void)tabBarControllerSelectedRiseButton {
     

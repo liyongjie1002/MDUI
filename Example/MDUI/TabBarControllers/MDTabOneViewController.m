@@ -26,8 +26,8 @@
     [super viewDidLoad];
 
     self.title = @"星星";
-    self.view.backgroundColor = [UIColor whiteColor];
-    [self.md_tabBarItem setBadgeValue:@"999"];
+    self.view.backgroundColor = [UIColor redColor];
+    [self.md_tabBarItem setBadgeValue:@"9"];
 }
 
 @end

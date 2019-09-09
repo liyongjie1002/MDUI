@@ -28,6 +28,7 @@
     // Do any additional setup after loading the view.
     
     [self.md_tabBarItem setDefaultBadge];
+    self.view.backgroundColor = [UIColor cyanColor];
 }
 
 

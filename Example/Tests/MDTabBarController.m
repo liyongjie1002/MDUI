@@ -106,7 +106,6 @@
     }
     
     _selectedIndex = selectedIndex;
-    [self.tabBar setSelectedItem:self.tabBar.items[selectedIndex]];
     [self setSelectedViewController:[self.viewControllers objectAtIndex:selectedIndex]];
     [self addChildViewController:self.selectedViewController];
     [self.selectedViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
@@ -115,6 +114,11 @@
     
     [self.view setNeedsLayout];
     [self setNeedsStatusBarAppearanceUpdate];
+}
+
+- (void)setTabbarItems:(NSArray *)tabbarItems {
+    
+    [self.tabBar setItems:tabbarItems];
 }
 
 - (void)setViewControllers:(NSArray *)viewControllers {
@@ -127,19 +131,13 @@
             [viewController removeFromParentViewController];
         }
     }
-    
     if (viewControllers && [viewControllers isKindOfClass:[NSArray class]]) {
         
         _viewControllers = [viewControllers copy];
-        NSMutableArray *tabBarItems = [[NSMutableArray alloc] init];
-        
         for (UIViewController *viewController in viewControllers) {
-            MDTabBarItem *tabBarItem = [[MDTabBarItem alloc] init];
-            [tabBarItem setTitle:viewController.title];
-            [tabBarItems addObject:tabBarItem];
+
             [viewController md_setTabBarController:self];
         }
-        [self.tabBar setItems:tabBarItems];
         
     } else {
         
@@ -280,18 +278,12 @@
 - (MDTabBarItem *)md_tabBarItem {
     
     NSInteger index = [self.md_tabBarController indexForViewController:self];
-    return [self.md_tabBarController.tabBar.items objectAtIndex:index];
-}
-
-- (void)md_setTabBarItem:(MDTabBarItem *)tabBarItem {
-    
-    if (!self.md_tabBarController) {
-        return;
+    for (MDTabBarItem *item in self.md_tabBarController.tabBar.items) {
+        if (item.tag == index) {
+            return item;
+        }
     }
-    NSInteger index = [self.md_tabBarController indexForViewController:self];
-    NSMutableArray *tabBarItems = [[NSMutableArray alloc] initWithArray:self.md_tabBarController.tabBar.items];
-    [tabBarItems replaceObjectAtIndex:index withObject:tabBarItem];
-    [self.md_tabBarController.tabBar setItems:tabBarItems];
+    return nil;
 }
 
 @end

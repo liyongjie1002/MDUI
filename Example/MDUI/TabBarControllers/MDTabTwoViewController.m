@@ -7,25 +7,18 @@
 //
 
 #import "MDTabTwoViewController.h"
-
+#import "MDTabBarController.h"
 @interface MDTabTwoViewController ()
 
 @end
 
 @implementation MDTabTwoViewController
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.title = @"云朵";
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.title = @"云朵";
     self.view.backgroundColor = [UIColor yellowColor];
+    self.md_tabBarItem.badgeValue = @"1";
 }
 
 @end

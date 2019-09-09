@@ -50,7 +50,7 @@
         if (!itemHeight) {
             itemHeight = frameSize.height;
         }
-        item.frame = CGRectMake(self.contentEdgeInsets.left + index * self.itemWidth, frameSize.height - itemHeight - self.contentEdgeInsets.top, self.itemWidth, itemHeight - self.contentEdgeInsets.bottom);
+        item.frame = CGRectMake(self.contentEdgeInsets.left + index * self.itemWidth + (passedRiseItem ? self.itemWidth : 0), frameSize.height - itemHeight - self.contentEdgeInsets.top, self.itemWidth, itemHeight - self.contentEdgeInsets.bottom);
         [item setNeedsDisplay];
         
         if (item.tabBarItemType != MDTabBarItemRise) {
@@ -70,7 +70,6 @@
     _items = [items copy];
     for (MDTabBarItem *item in _items) {
         [item addTarget:self action:@selector(tabBarItemSelected:) forControlEvents:UIControlEventTouchDown];
-    
         [self addSubview:item];
     }
 }
@@ -100,17 +99,14 @@
     MDTabBarItem *item = sender;
     if (item.tabBarItemType != MDTabBarItemRise) {
         if ([self.delegate respondsToSelector:@selector(tabBar:shouldSelectItemAtIndex:)]) {
-            NSInteger index = [self.items indexOfObject:sender];
-            if (![self.delegate tabBar:self shouldSelectItemAtIndex:index]) {
+            if (![self.delegate tabBar:self shouldSelectItemAtIndex:item.tag]) {
                 return;
             }
         }
         [self setSelectedItem:sender];
         if ([self.delegate respondsToSelector:@selector(tabBar:didSelectItemAtIndex:)]) {
-            NSInteger index = [self.items indexOfObject:self.selectedItem];
-            [self.delegate tabBar:self didSelectItemAtIndex:index];
+            [self.delegate tabBar:self didSelectItemAtIndex:item.tag];
         }
-    
     } else {
         
         // 突出按钮被点击
@@ -130,26 +126,28 @@
     [_selectedItem setSelected:YES];
 }
 
-
+// 超出按钮点击，找到image返回给当前的tabbarItem
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     UIView *view = [super hitTest:point withEvent:event];
     if (view == nil) {
-        
-        for (UIView *subview in self.selectedItem.subviews) {
-            if ([subview isKindOfClass:[UIImageView class]]) {
-                // 转换坐标系
-                CGPoint newPoint = [subview convertPoint:point fromView:self];
-                // 判断触摸的位置是否存在自己的子控件，即便这个子控件超出了父视图的范围
-                if (CGRectContainsPoint(subview.bounds, newPoint)) {
-                    // 返回一个拦截事件的对象，这个对象可以是self，也可以是具体的子控件
-                    //                        return self;
-                    view = subview;
+        for (UIView *subview in self.subviews) {
+            CGPoint newPoint = [subview convertPoint:point fromView:self];
+            if ([subview isKindOfClass:[MDTabBarItem class]]) {
+                for (UIView *itemView in subview.subviews) {
+                    if ([itemView isKindOfClass:[UIImageView class]]) {
+                        // 判断触摸的位置是否存在自己的子控件，即便这个子控件超出了父视图的范围
+                        if (CGRectContainsPoint(itemView.frame, newPoint)) {
+                            // 返回一个拦截事件的对象，这个对象可以是self，也可以是具体的子控件
+                            return subview;
+                        }
+                    }
                 }
             }
         }
     }
     return view;
 }
+
 #pragma mark - Accessibility
 // 返回YES，所有子视图的可访问性会被隐藏，不可访问
 - (BOOL)isAccessibilityElement{
